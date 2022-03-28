@@ -1,0 +1,18 @@
+{
+  "name": "wosis",
+  "packageManager": "yarn@3.1.1",
+  "version": "1.0.0",
+  "description": "WoSIS monorepo",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.wur.nl:isric/databases/wosis.git"
+  },
+  "license": "UNLICENSED",
+  "author": "Luis Calisto <luis.calisto@isric.org>",
+  "scripts": {
+    "gm": "yarn run graphile-migrate"
+  },
+  "dependencies": {
+    "graphile-migrate": "^1.2.0"
+  }
+}

@@ -1,0 +1,9 @@
+CREATE DATABASE iso28258;
+CREATE DATABASE iso28258_shadow;
+
+\c iso28258
+CREATE EXTENSION postgis;
+
+\c iso28258_shadow
+CREATE EXTENSION postgis;
+
