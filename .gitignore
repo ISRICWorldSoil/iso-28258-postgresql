@@ -1,4 +1,4 @@
 *.swp
-migrations/.env
+.env
 node_modules
 .yarn
