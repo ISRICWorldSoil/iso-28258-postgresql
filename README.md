@@ -20,7 +20,7 @@ Concepts included
 Concepts not included
 ---------------------
 
-- Horizon & Layer: as they are essentially the same in the domain, for now only ProfileElement is include.
+- Horizon & Layer: as they are essentially the same in the domain, for now only ProfileElement is included.
 - Sample
 - Specimen
 
