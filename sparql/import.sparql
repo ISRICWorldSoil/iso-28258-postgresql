@@ -1,0 +1,25 @@
+
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/codelists#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/common#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/ext/property#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/main#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/observation#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/procedure#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/profile#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/siteplot#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/surface#>;	
+SPARQL CLEAR GRAPH  <http://w3id.org/glosis/model/v1.0.0/unit#>;
+
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_cl.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/codelists#');
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_common.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/common#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_ext_property.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/ext/property#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_layer_horizon.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/layerhorizon#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_main.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/main#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_observation.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/observation#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_procedure.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/procedure#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_profile.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/profile#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_siteplot.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/siteplot#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_surface.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/surface#');	
+DB.DBA.TTLP_MT (file_to_string_output ('/database/glosis_unit.ttl'), '', 'http://w3id.org/glosis/model/v1.0.0/unit#');
+
