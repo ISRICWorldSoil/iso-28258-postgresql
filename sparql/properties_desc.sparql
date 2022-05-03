@@ -1,0 +1,42 @@
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?query
+WHERE {
+    ?p a sosa:ObservableProperty .
+    ?p rdfs:label ?l .
+    BIND (CONCAT('INSERT INTO core.property_desc_surface (label, uri) VALUES (\'', ?l,
+          '\', \'', ?p, '\');') AS ?query)
+}
+
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?query
+WHERE {
+    ?p a sosa:ObservableProperty .
+    ?p rdfs:label ?l .
+    BIND (CONCAT('INSERT INTO core.property_desc_plot (label, uri) VALUES (\'', ?l,
+          '\', \'', ?p, '\');') AS ?query)
+}
+
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?query
+WHERE {
+    ?p a sosa:ObservableProperty .
+    ?p rdfs:label ?l .
+    BIND (CONCAT('INSERT INTO core.property_desc_profile (label, uri) VALUES (\'', ?l,
+          '\', \'', ?p, '\');') AS ?query)
+}
+
+
+PREFIX sosa: <http://www.w3.org/ns/sosa/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?query
+WHERE {
+    ?p a sosa:ObservableProperty .
+    ?p rdfs:label ?l .
+    BIND (CONCAT('INSERT INTO core.property_desc_element (label, uri) VALUES (\'', ?l,
+          '\', \'', ?p, '\');') AS ?query)
+}
