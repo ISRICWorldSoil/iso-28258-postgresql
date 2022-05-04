@@ -1,24 +1,49 @@
-PREFIX sosa: <http://www.w3.org/ns/sosa/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+# These queries are meant to be run through iSQL. Remove the SPARQL prefix and
+# ; suffix to run them directly through a SPARQL end-point.
+
+# Observable properties for Surface
+
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/surface#>
 SELECT ?query
 WHERE {
-    ?p a sosa:ObservableProperty .
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest .
+    ?obs rdfs:subClassOf ?rest_c .
+    ?rest owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest owl:allValuesFrom glosis_su:GL_Surface .
+    ?rest_c owl:onProperty sosa:observedProperty .
+    ?rest_c owl:hasValue ?p .
     ?p rdfs:label ?l .
     BIND (CONCAT('INSERT INTO core.property_desc_surface (label, uri) VALUES (\'', ?l,
           '\', \'', ?p, '\');') AS ?query)
 }
+;
 
+# Observable properties for Plot
 
-PREFIX sosa: <http://www.w3.org/ns/sosa/>
-PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX glosis_sp:  <http://w3id.org/glosis/model/v1.0.0/siteplot#>
 SELECT ?query
 WHERE {
-    ?p a sosa:ObservableProperty .
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest .
+    ?obs rdfs:subClassOf ?rest_c .
+    ?rest owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest owl:allValuesFrom glosis_sp:GL_Plot .
+    ?rest_c owl:onProperty sosa:observedProperty .
+    ?rest_c owl:hasValue ?p .
     ?p rdfs:label ?l .
     BIND (CONCAT('INSERT INTO core.property_desc_plot (label, uri) VALUES (\'', ?l,
           '\', \'', ?p, '\');') AS ?query)
 }
-
+;
 
 PREFIX sosa: <http://www.w3.org/ns/sosa/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
