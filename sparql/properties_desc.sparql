@@ -24,7 +24,6 @@ WHERE {
 ;
 
 # Observable properties for Plot
-
 SPARQL
 PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl:   <http://www.w3.org/2002/07/owl#>
@@ -36,7 +35,10 @@ WHERE {
     ?obs rdfs:subClassOf ?rest .
     ?obs rdfs:subClassOf ?rest_c .
     ?rest owl:onProperty sosa:hasFeatureOfInterest .
-    ?rest owl:allValuesFrom glosis_sp:GL_Plot .
+    ?rest owl:allValuesFrom ?u .
+    ?u owl:unionOf ?set . 
+    ?set rdf:rest*/rdf:first ?elements .
+    FILTER (glosis_sp:GL_Plot IN (?elements)) .
     ?rest_c owl:onProperty sosa:observedProperty .
     ?rest_c owl:hasValue ?p .
     ?p rdfs:label ?l .
