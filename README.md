@@ -35,7 +35,7 @@ Open questions
 
 - Descritive observations do not have procedures. How relevant are they?
 
-- Descriptive results allow for the same FoI to be associated to the same codelist more than once (issu #3) 
+- Thesuarus for descriptive observations are not hierarchical, is it necessary? 
 
 Diagrams
 --------
