@@ -1,0 +1,141 @@
+# Code-list values for descriptive observations for Surface
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/surface#>
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_su:GL_Surface .
+    ?rest_p owl:onProperty sosa:observedProperty . 
+    ?rest_p owl:hasValue ?prop .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+#    BIND (CONCAT('INSERT INTO core.thesaurus_desc_surface (label, uri) VALUES (\'', ?l,
+#          '\', \'', ?value, '\');') AS ?query)
+#    BIND (CONCAT("INSERT INTO core.observation_desc_surface
+#                         (property_desc_surface_id, thesaurus_desc_surface_id)
+#                  VALUES ((SELECT property_desc_surface_id
+#                             FROM core.property_desc_surface
+#                            WHERE uri LIKE \'", ?prop, "\'),
+#                          (SELECT thesaurus_desc_surface_id
+#                             FROM core.thesaurus_desc_surface
+#                            WHERE uri LIKE \'", ?value, "\'));") AS ?query)
+    BIND (CONCAT("INSERT INTO core.observation_desc_surface (property_desc_surface_id, thesaurus_desc_surface_id) VALUES ((SELECT property_desc_surface_id FROM core.property_desc_surface WHERE uri LIKE \'", 
+                   ?prop, 
+                   "\'), (SELECT thesaurus_desc_surface_id FROM core.thesaurus_desc_surface WHERE uri LIKE \'", 
+                   ?value, 
+                   "\'));") AS ?query)
+};
+
+
+# Code-list values for descriptive observations for Profile
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/profile#>
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_su:GL_Profile .
+    ?rest_p owl:onProperty sosa:observedProperty . 
+    ?rest_p owl:hasValue ?prop .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT("INSERT INTO core.observation_desc_profile (property_desc_profile_id, thesaurus_desc_profile_id) VALUES ((SELECT property_desc_profile_id FROM core.property_desc_profile WHERE uri LIKE \'", 
+                   ?prop, 
+                   "\'), (SELECT thesaurus_desc_profile_id FROM core.thesaurus_desc_profile WHERE uri LIKE \'", 
+                   ?value, 
+                   "\'));") AS ?query)
+};
+
+
+# Descriptive observations for Plot
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/siteplot#>
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_su:GL_Plot .
+    ?rest_p owl:onProperty sosa:observedProperty . 
+    ?rest_p owl:hasValue ?prop .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT("""
+    INSERT INTO core.observation_desc_element
+           (property_desc_element_id, thesaurus_desc_element_id)
+    VALUES ((SELECT property_desc_element_id
+               FROM core.property_desc_element
+              WHERE uri LIKE \'""", ?prop, """\'),
+            (SELECT thesaurus_desc_element_id
+               FROM core.thesaurus_desc_element
+              WHERE uri LIKE \'""", ?value, "\'));") AS ?query)
+};
+
+
+
+# Descriptive observations for Element
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_lh:  <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
+SELECT DISTINCT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom ?u .
+    ?rest_p owl:onProperty sosa:observedProperty . 
+    ?rest_p owl:hasValue ?prop .
+    ?u owl:unionOf ?set . 
+    ?set rdf:rest*/rdf:first ?elements .
+    FILTER (glosis_lh:GL_Layer IN (?elements)) .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT("""
+    INSERT INTO core.observation_desc_element
+           (property_desc_element_id, thesaurus_desc_element_id)
+    VALUES ((SELECT property_desc_element_id
+               FROM core.property_desc_element
+              WHERE uri LIKE \'""", ?prop, """\'),
+            (SELECT thesaurus_desc_element_id
+               FROM core.thesaurus_desc_element
+              WHERE uri LIKE \'""", ?value, "\'));") AS ?query)
+};
+
+
+
+
+
