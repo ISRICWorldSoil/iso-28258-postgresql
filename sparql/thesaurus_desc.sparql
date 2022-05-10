@@ -1,0 +1,152 @@
+# Get all Observations for Surface
+
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/surface#>
+SELECT ?obs ?rest
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest .
+    ?rest owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest owl:allValuesFrom glosis_su:GL_Surface .
+}
+;
+
+# Get all Code-lists for Surface
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/surface#>
+SELECT ?obs ?code_list
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_su:GL_Surface .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+}
+;
+
+
+# Get all Code-lists for Profile
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX glosis_pr:  <http://w3id.org/glosis/model/v1.0.0/profile#>
+SELECT ?obs ?code_list
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_pr:GL_Profile .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+}
+;
+
+# Code-list values for descriptive observations for Surface
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_su:  <http://w3id.org/glosis/model/v1.0.0/surface#>
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_su:GL_Surface .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT('INSERT INTO core.thesaurus_desc_surface (label, uri) VALUES (\'', ?l,
+          '\', \'', ?value, '\');') AS ?query)
+}
+;
+
+# Code-list values for descriptive observations Plot
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_sp:  <http://w3id.org/glosis/model/v1.0.0/siteplot#>
+SELECT DISTINCT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom ?u .
+    ?u owl:unionOf ?set . 
+    ?set rdf:rest*/rdf:first ?elements .
+    FILTER (glosis_sp:GL_Plot IN (?elements)) .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT('INSERT INTO core.thesaurus_desc_plot (label, uri) VALUES (\'', ?l,
+          '\', \'', ?value, '\');') AS ?query)
+}
+;
+
+# Code-list values for descriptive observations for Profile
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_pr:  <http://w3id.org/glosis/model/v1.0.0/profile#>
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_pr:GL_Profile .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT('INSERT INTO core.thesaurus_desc_profile (label, uri) VALUES (\'', ?l,
+          '\', \'', ?value, '\');') AS ?query)
+};
+
+
+# Code-list values for descriptive observations Element
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_lh:  <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
+SELECT DISTINCT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom ?u .
+    ?u owl:unionOf ?set . 
+    ?set rdf:rest*/rdf:first ?elements .
+    FILTER (glosis_lh:GL_Layer IN (?elements)) .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT('INSERT INTO core.thesaurus_desc_element (label, uri) VALUES (\'', ?l,
+          '\', \'', ?value, '\');') AS ?query)
+}
+;
+
+
