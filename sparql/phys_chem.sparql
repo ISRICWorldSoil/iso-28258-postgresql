@@ -1,0 +1,39 @@
+# Physio-chemical properties
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_lh:  <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
+SELECT DISTINCT ?query
+WHERE {
+    ?obs rdfs:subClassOf  glosis_lh:PhysioChemical .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?rest_p owl:onProperty sosa:observedProperty .
+    ?rest_p owl:hasValue ?prop .
+    ?prop skos:prefLabel ?label
+    BIND (CONCAT('INSERT INTO core.property_phys_chem (label, uri) VALUES (\'', ?label,
+          '\', \'', ?prop, '\');') AS ?query)
+};
+
+
+## Aid queries
+
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_lh:  <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
+SELECT ?obs ?prop ?proc
+WHERE {
+    ?obs rdfs:subClassOf  glosis_lh:PhysioChemical .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?obs rdfs:subClassOf ?rest_m .
+    ?rest_p owl:onProperty sosa:observedProperty .
+    ?rest_p owl:hasValue ?prop .
+    ?rest_m owl:onProperty sosa:usedProcedure .
+    ?rest_m owl:someValuesFrom ?proc .
+};
+
+
