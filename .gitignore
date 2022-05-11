@@ -1,6 +1,16 @@
 *.swp
 .env
 node_modules
-.yarn
 *.swn
 *.swo
+
+
+# Yarn using Zero-Installs
+
+.yarn/*
+!.yarn/cache
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
