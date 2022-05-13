@@ -13,6 +13,6 @@
     "gm": "yarn run graphile-migrate"
   },
   "dependencies": {
-    "graphile-migrate": "^1.2.0"
+    "graphile-migrate": "^1.3.0"
   }
 }
