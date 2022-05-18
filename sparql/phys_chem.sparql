@@ -16,6 +16,23 @@ WHERE {
           '\', \'', ?prop, '\');') AS ?query)
 };
 
+# Missing properties - caused by GloSIS issue #
+SPARQL
+PREFIX rdfs:  <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#> 
+PREFIX glosis_lh:  <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
+SELECT DISTINCT ?query
+WHERE {
+    ?obs rdfs:subClassOf  glosis_lh:PhysioChemical .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?rest_p owl:onProperty sosa:observedProperty .
+    ?rest_p owl:hasValue ?prop .
+    ?prop rdfs:label ?label .
+    BIND (CONCAT('INSERT INTO core.property_phys_chem (label, uri) VALUES (\'', ?label,
+          '\', \'', ?prop, '\');') AS ?query)
+};
 
 # Units of measure
 SPARQL
@@ -35,6 +52,65 @@ WHERE {
     BIND (CONCAT('INSERT INTO core.unit_of_measure (label, uri) VALUES (\'', ?label,
          '\', \'', ?unit, '\');') AS ?query)
 };
+
+# Procedures
+SPARQL
+PREFIX owl:   <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX skos:  <http://www.w3.org/2004/02/skos/core#>
+PREFIX glosis_proc: <http://w3id.org/glosis/model/v1.0.0/procedure#>
+SELECT ?query
+WHERE {
+    ?parent a sosa:Procedure .
+    ?uri a ?parent .
+    ?uri skos:prefLabel ?label .    
+    OPTIONAL {?uri skos:broader ?broader} .
+    BIND (CONCAT('INSERT INTO core.procedure_phys_chem (uri, label, broader_id) VALUES (\'', ?uri,
+         '\', \'', ?label, '\', (SELECT procedure_phys_chem_id FROM core.procedure_phys_chem WHERE uri LIKE \'', 
+         ?broader ,'\')  );') AS ?query)
+};
+
+
+# Observations
+docker exec -i virt-db isql 1111 dba secret exec="
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
+PREFIX qudt: <http://qudt.org/schema/qudt/>
+PREFIX glosis_lh: <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
+#SELECT DISTINCT(?obs) ?prop ?unit ?procedure
+SELECT DISTINCT(?query)
+WHERE {
+    ?obs rdfs:subClassOf glosis_lh:PhysioChemical .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?rest_p owl:onProperty sosa:observedProperty .
+    ?rest_p owl:hasValue ?prop .
+    ?obs rdfs:subClassOf ?rest_v .
+    ?rest_v owl:onProperty sosa:hasResult .
+    ?rest_v owl:allValuesFrom ?value .
+    ?value rdfs:subClassOf ?rest_u .
+    ?rest_u owl:onProperty qudt:unit .
+    ?rest_u owl:hasValue ?unit .
+    ?obs rdfs:subClassOf ?rest_m .
+    ?rest_m owl:onProperty sosa:usedProcedure .
+    ?rest_m owl:someValuesFrom ?meta_proc .
+    ?procedure a ?meta_proc .
+    BIND (CONCAT('INSERT INTO core.observation_phys_chem\n',
+                 '       (property_phys_chem_id,\n',
+                 '        unit_of_measure_id,\n',
+                 '        procedure_phys_chem_id) \n',
+                 'VALUES ((SELECT property_phys_chem_id\n',
+                 '           FROM core.property_phys_chem\n',
+                 '          WHERE uri LIKE \'', ?prop, '\'),\n',
+                 '        (SELECT unit_of_measure_id\n',
+                 '           FROM core.unit_of_measure\n',
+                 '          WHERE uri LIKE \'', ?unit, '\'),\n',
+                 '        (SELECT procedure_phys_chem_id\n',
+                 '           FROM core.procedure_phys_chem\n',
+                 '          WHERE uri LIKE \'', ?procedure, '\'));\n') AS ?query)
+};" > out.txt
+
 
 
 
