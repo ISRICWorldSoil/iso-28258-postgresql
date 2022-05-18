@@ -38,20 +38,24 @@ WHERE {
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX sosa:  <http://www.w3.org/ns/sosa/>
 PREFIX qudt: <http://qudt.org/schema/qudt/>
 PREFIX glosis_lh: <http://w3id.org/glosis/model/v1.0.0/layerhorizon#>
 SELECT DISTINCT ?query
-#SELECT DISTINCT ?unit ?label
 WHERE {
-    ?value rdfs:subClassOf glosis_lh:PhysioChemicalValue .
-    ?value rdfs:subClassOf ?rest .
-    ?rest owl:onProperty qudt:unit .
-    ?rest owl:hasValue ?unit .
+    ?obs rdfs:subClassOf glosis_lh:PhysioChemical .
+    ?obs rdfs:subClassOf ?rest_v .
+    ?rest_v owl:onProperty sosa:hasResult .
+    ?rest_v owl:allValuesFrom ?value .
+    ?value rdfs:subClassOf ?rest_u .
+    ?rest_u owl:onProperty qudt:unit .
+    ?rest_u owl:hasValue ?unit .
     ?unit rdfs:label ?label .
     FILTER(lang(?label) = 'en') .
     BIND (CONCAT('INSERT INTO core.unit_of_measure (label, uri) VALUES (\'', ?label,
          '\', \'', ?unit, '\');') AS ?query)
 };
+
 
 # Procedures
 SPARQL
@@ -109,7 +113,7 @@ WHERE {
                  '        (SELECT procedure_phys_chem_id\n',
                  '           FROM core.procedure_phys_chem\n',
                  '          WHERE uri LIKE \'', ?procedure, '\'));\n') AS ?query)
-};" > out.txt
+};" > current.sql
 
 
 
