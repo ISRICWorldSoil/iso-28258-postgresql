@@ -12,6 +12,7 @@ Concepts included
 - Surface
 - Profile
 - Element
+- Specimen
 - Property
 - Procedure
 - Observation
@@ -22,7 +23,6 @@ Concepts not included
 
 - Horizon & Layer: as they are essentially the same in the domain, for now only ProfileElement is included.
 - Sample
-- Specimen
 
 Open questions
 --------------
@@ -30,10 +30,6 @@ Open questions
 - Is the Site concept necessary in this data model? (issue #1)
 
 - Use Layer instead of ProfileElement? (issue #2)
-
-- Should the data model also consider Samples and Specimens?
-
-- Descritive observations do not have procedures. How relevant are they?
 
 - Thesuarus for descriptive observations are not hierarchical, is it necessary? 
 
@@ -201,6 +197,7 @@ erDiagram
   result_phys_chem ||--o{ element : fk_element
   result_phys_chem ||--o{ observation_phys_chem : fk_observation_phys_chem
 ```
+
 How to deploy it
 -----------------
 
