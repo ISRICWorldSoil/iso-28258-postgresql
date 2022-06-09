@@ -31,7 +31,7 @@ Open questions
 
 - Use Layer instead of ProfileElement? (issue #2)
 
-- Thesuarus for descriptive observations are not hierarchical, is it necessary? 
+- Thesaurus for descriptive observations are not hierarchical, is it necessary? 
 
 Diagrams
 --------
@@ -73,27 +73,40 @@ erDiagram
     INTEGER surface_id
     INTEGER super_surface_id
     INTEGER site_id
-    unknown shape
+    NULL shape
+  }
+  specimen {
+    INTEGER specimen_id
+    VARCHAR code
+    INTEGER plot_id
+    INTEGER specimen_prep_process_id
+    INTEGER depth
   }
   site {
     INTEGER site_id
     VARCHAR site_code
-    unknown position
-    unknown extent
+    NULL position
+    NULL extent
+  }
+  element {
+    INTEGER element_id
+    VARCHAR(7) type
+    INTEGER profile_id
+    INTEGER order_element
+    INTEGER upper_depth
+    INTEGER lower_depth
+  }
+  specimen_prep_process {
+    INTEGER specimen_prep_process_id
+    INTEGER specimen_transport_id
+    INTEGER specimen_storage_id
+    VARCHAR definition
   }
   profile {
     INTEGER profile_id
     VARCHAR profile_code
     INTEGER plot_id
     INTEGER surface_id
-  }
-  element {
-    INTEGER element_id
-    element_type type
-    INTEGER profile_id
-    INTEGER order_element
-    INTEGER upper_depth
-    INTEGER lower_depth
   }
   plot {
     INTEGER plot_id
@@ -103,17 +116,21 @@ erDiagram
     DATE time_stamp
     VARCHAR map_sheet_code
     NUMERIC positional_accuracy
-    unknown position
+    NULL position
   }
   plot ||--o{ site : fk_site
-  surface ||--o{ site : fk_site
   surface ||--o{ surface : fk_surface
+  surface ||--o{ site : fk_site
   profile ||--o{ plot : fk_plot_id
   profile ||--o{ surface : fk_surface_id
   element ||--o{ profile : fk_profile
+  specimen ||--o{ plot : fk_plot
+  specimen ||--o{ specimen_prep_process : fk_specimen_prep_process
 ```
 
 ### Descriptive Observations
+
+A similar structure applies to the main FoIs: Surface, Plot, Profile, Element and Specimen. 
 
 ```mermaid
 erDiagram
@@ -150,6 +167,8 @@ erDiagram
 ```
 
 ### Physio-chemical Observations
+
+These observations only apply to Element. Surface, Plot and Profile have no physio-chemical observations for the time being. Specimen has its own structure, around the table `observation_numeric_specimen`, but it is empty, since its nature remains unknown. 
 
 ```mermaid
 erDiagram
@@ -197,6 +216,74 @@ erDiagram
   result_phys_chem ||--o{ element : fk_element
   result_phys_chem ||--o{ observation_phys_chem : fk_observation_phys_chem
 ```
+
+Meta-data model (VCard)
+=======================
+
+Concepts derived from the [VCard specification](https://www.w3.org/TR/vcard-rdf):
+- Address
+- Individual
+- Organisation
+- Organisation unit
+
+```mermaid
+erDiagram
+  organisation_individual {
+    INTEGER individual_id
+    INTEGER organisation_id
+    INTEGER organisation_unit_id
+    VARCHAR role
+  }
+  organisation {
+    INTEGER organisation_id
+    INTEGER parent_id
+    VARCHAR name
+    VARCHAR email
+    VARCHAR telephone
+    VARCHAR url
+    INTEGER address_id
+  }
+  organisation_unit {
+    INTEGER organisation_unit_id
+    VARCHAR name
+    INTEGER organisation_id
+  }
+  address {
+    INTEGER address_id
+    VARCHAR street_address
+    VARCHAR postal_code
+    VARCHAR locality
+    VARCHAR country
+  }
+  individual {
+    INTEGER individual_id
+    VARCHAR name
+    VARCHAR honorific_title
+    VARCHAR email
+    VARCHAR telephone
+    VARCHAR url
+    INTEGER address_id
+  }
+  individual ||--o{ address : fk_address_id
+  organisation ||--o{ address : fk_address_id
+  organisation ||--o{ organisation : fk_parent_id
+  organisation_unit ||--o{ organisation : fk_organisation_id
+  organisation_individual ||--o{ organisation_unit : fk_organisation_unit_id
+  organisation_individual ||--o{ individual : fk_individual_id
+  organisation_individual ||--o{ organisation : fk_organisation_id
+
+```
+
+Open questions
+--------------
+
+- Should the `role` field have a thesaurus? (issue #10)
+- Does Organisation need a specific reference to country (issue #11)
+- Which concepts in the `core` require meta-data (issue #12) 
+
+
+
+***
 
 How to deploy it
 -----------------
