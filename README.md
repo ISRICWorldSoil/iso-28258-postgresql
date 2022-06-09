@@ -90,7 +90,7 @@ erDiagram
   }
   element {
     INTEGER element_id
-    VARCHAR(7) type
+    VARCHAR type
     INTEGER profile_id
     INTEGER order_element
     INTEGER upper_depth
@@ -284,6 +284,9 @@ Open questions
 
 
 ***
+
+***
+
 
 How to deploy it
 -----------------
