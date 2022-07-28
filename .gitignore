@@ -1,8 +1,11 @@
-*.swp
 .env
 node_modules
+*.swp
 *.swn
 *.swo
+*.swk
+*.swl
+*.swm
 
 
 # Yarn using Zero-Installs
