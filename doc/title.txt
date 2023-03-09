@@ -1,0 +1,23 @@
+---
+title: Data model for the ISO 28258 domain model
+author:
+ - Luís M. de Sousa
+ - Luís Calisto 
+ - Paul van Genuchten 
+ - Ulan Turdukulov 
+ - Bas Kempen
+language: en-IE
+autoSectionLabels: true
+
+abstract: |
+
+  This document introduces a generic data model developed at ISRIC implementing
+  the ISO 28258 standard. Furthermore, the data model captures the extensive
+  code-lists gathered in the GloSIS web ontology as thesauri. This data model is
+  intended as a template to be specialised in particular projects or use cases.
+  Soils4Africa was the first of such projects. Details are given on how model
+  classes and associations were translated into tables and relations, together
+  with maintenance and development guidelines.
+---
+
+
