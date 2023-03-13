@@ -9,7 +9,8 @@ files="title.txt \
        06-Meta-data.md \
        08-Operational.md \
        09-Future.md \
-       10-Biblio.md "
+       10-Ack.md \
+       11-Biblio.md "
 
 options="pandoc \
          --filter pandoc-crossref \
