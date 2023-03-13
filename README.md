@@ -3,6 +3,21 @@ ISO-28258 Data Model
 
 Postgres data model implementing the ISO-28258 standard.
 
+Copyright (C) 2022-2023  ISRIC - World Soil Information
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program.  If not, see <[https://www.gnu.org/licenses/](https://www.gnu.org/licenses/)>.
+
 Concepts included
 -----------------
 
@@ -23,15 +38,6 @@ Concepts not included
 
 - Horizon & Layer: as they are essentially the same in the domain, for now only ProfileElement is included.
 - Sample
-
-Open questions
---------------
-
-- Is the Site concept necessary in this data model? (issue #1)
-
-- Use Layer instead of ProfileElement? (issue #2)
-
-- Thesaurus for descriptive observations are not hierarchical, is it necessary? 
 
 Diagrams
 --------
@@ -273,13 +279,6 @@ erDiagram
   organisation_individual ||--o{ organisation : fk_organisation_id
 
 ```
-
-Open questions
---------------
-
-- Should the `role` field have a thesaurus? (issue #10)
-- Does Organisation need a specific reference to country (issue #11)
-- Which concepts in the `core` require meta-data (issue #12) 
 
 
 
