@@ -1,0 +1,1479 @@
+<!doctype html>
+<html >
+<head>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!--[if lt IE 9]>
+                <script src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+        <![endif]-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Style-Type" content="text/css" />
+
+    <!-- <link rel="stylesheet" type="text/css" href="template.css" /> -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/template.css" />
+
+    <link href="https://vjs.zencdn.net/5.4.4/video-js.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-2.2.1.min.js"></script>
+    <!-- <script type='text/javascript' src='menu/js/jquery.cookie.js'></script> -->
+    <!-- <script type='text/javascript' src='menu/js/jquery.hoverIntent.minified.js'></script> -->
+    <!-- <script type='text/javascript' src='menu/js/jquery.dcjqaccordion.2.7.min.js'></script> -->
+
+    <!-- <link href="menu/css/skins/blue.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="menu/css/skins/graphite.css" rel="stylesheet" type="text/css" /> -->
+    <!-- <link href="menu/css/skins/grey.css" rel="stylesheet" type="text/css" /> -->
+  
+    <!-- <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script> -->
+        
+  
+    <!-- <script src="script.js"></script> -->
+  
+    <!-- <script src="jquery.sticky-kit.js "></script> -->
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/menu/js/jquery.cookie.js'></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/menu/js/jquery.hoverIntent.minified.js'></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/menu/js/jquery.dcjqaccordion.2.7.min.js'></script>
+
+    <link href="https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/menu/css/skins/blue.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/menu/css/skins/graphite.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/menu/css/skins/grey.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/gh/ryangrose/easy-pandoc-templates@948e28e5/css/elegant_bootstrap.css" rel="stylesheet" type="text/css" />
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/script.js"></script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/diversen/pandoc-bootstrap-adaptive-template@959c3622/jquery.sticky-kit.js"></script>
+    <meta name="generator" content="pandoc" />
+  <meta name="author" content="Luís M. de Sousa" />
+  <meta name="author" content="Luís Calisto" />
+  <meta name="author" content="Paul van Genuchten" />
+  <meta name="author" content="Ulan Turdukulov" />
+  <meta name="author" content="Bas Kempen" />
+  <title>Data model for the ISO 28258 domain model</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+</head>
+<body>
+
+    
+    <div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <span class="doc-title">Data model for the ISO 28258 domain
+model</span>
+        <ul class="nav pull-right doc-info">
+                    <li><p class="navbar-text">Luís M. de Sousa</p></li>
+                    <li><p class="navbar-text">Luís Calisto</p></li>
+                    <li><p class="navbar-text">Paul van
+Genuchten</p></li>
+                    <li><p class="navbar-text">Ulan Turdukulov</p></li>
+                    <li><p class="navbar-text">Bas Kempen</p></li>
+                              <li><p class="navbar-text">maart13,
+2023</p></li>
+                  </ul>
+      </div>
+    </div>
+  </div>
+    <div class="container">
+    <div class="row">
+            <div id="TOC" class="span3">
+        <div class="well toc">
+
+        <ul>
+        <li><a href="#sec:copyright"
+        id="toc-sec:copyright">Copyright</a></li>
+        <li><a href="#sec:intro" id="toc-sec:intro"><span
+        class="toc-section-number">1</span> Introduction</a>
+        <ul>
+        <li><a href="#sec:motivation" id="toc-sec:motivation"><span
+        class="toc-section-number">1.1</span> Motivation</a></li>
+        <li><a href="#sec:the-option-for-an-international-standard"
+        id="toc-sec:the-option-for-an-international-standard"><span
+        class="toc-section-number">1.2</span> The option for an
+        international standard</a></li>
+        <li><a href="#sec:structure" id="toc-sec:structure"><span
+        class="toc-section-number">1.3</span> Structure</a></li>
+        <li><a href="#sec:format" id="toc-sec:format"><span
+        class="toc-section-number">1.4</span> Format</a></li>
+        <li><a href="#sec:glossary" id="toc-sec:glossary"><span
+        class="toc-section-number">1.5</span> Glossary</a></li>
+        </ul></li>
+        <li><a href="#sec:28258" id="toc-sec:28258"><span
+        class="toc-section-number">2</span> The ISO 28258 domain
+        model</a>
+        <ul>
+        <li><a href="#sec:overview" id="toc-sec:overview"><span
+        class="toc-section-number">2.1</span> Overview</a></li>
+        <li><a href="#sec:28258:relation"
+        id="toc-sec:28258:relation"><span
+        class="toc-section-number">2.2</span> Relation with other soil
+        ontologies</a>
+        <ul>
+        <li><a href="#sec:inspire-soil-theme"
+        id="toc-sec:inspire-soil-theme"><span
+        class="toc-section-number">2.2.1</span> INSPIRE Soil
+        Theme</a></li>
+        <li><a href="#sec:ogc-soilie" id="toc-sec:ogc-soilie"><span
+        class="toc-section-number">2.2.2</span> OGC SoilIE</a></li>
+        <li><a href="#sec:glosis" id="toc-sec:glosis"><span
+        class="toc-section-number">2.2.3</span> GloSIS</a></li>
+        </ul></li>
+        <li><a href="#sec:issues-identified"
+        id="toc-sec:issues-identified"><span
+        class="toc-section-number">2.3</span> Issues identified</a></li>
+        </ul></li>
+        <li><a href="#sec:foi" id="toc-sec:foi"><span
+        class="toc-section-number">3</span> Features of Interest</a>
+        <ul>
+        <li><a href="#sec:general" id="toc-sec:general"><span
+        class="toc-section-number">3.1</span> General</a></li>
+        <li><a href="#sec:project-and-site"
+        id="toc-sec:project-and-site"><span
+        class="toc-section-number">3.2</span> Project and Site</a></li>
+        <li><a href="#sec:spatial-features"
+        id="toc-sec:spatial-features"><span
+        class="toc-section-number">3.3</span> Spatial Features</a></li>
+        <li><a href="#sec:other-features-of-interest"
+        id="toc-sec:other-features-of-interest"><span
+        class="toc-section-number">3.4</span> Other Features of
+        Interest</a></li>
+        </ul></li>
+        <li><a href="#sec:om" id="toc-sec:om"><span
+        class="toc-section-number">4</span> Observations &amp;
+        Measurements</a>
+        <ul>
+        <li><a href="#sec:main-concepts"
+        id="toc-sec:main-concepts"><span
+        class="toc-section-number">4.1</span> Main concepts</a></li>
+        <li><a href="#sec:physio-chemical-observations"
+        id="toc-sec:physio-chemical-observations"><span
+        class="toc-section-number">4.2</span> Physio-chemical
+        Observations</a></li>
+        <li><a href="#sec:descriptive-observations"
+        id="toc-sec:descriptive-observations"><span
+        class="toc-section-number">4.3</span> Descriptive
+        Observations</a></li>
+        </ul></li>
+        <li><a href="#sec:thes" id="toc-sec:thes"><span
+        class="toc-section-number">5</span> Thesauri</a>
+        <ul>
+        <li><a href="#sec:glosis-code-lists"
+        id="toc-sec:glosis-code-lists"><span
+        class="toc-section-number">5.1</span> GloSIS code-lists</a></li>
+        <li><a href="#sec:sparql-transformations"
+        id="toc-sec:sparql-transformations"><span
+        class="toc-section-number">5.2</span> SPARQL
+        transformations</a></li>
+        </ul></li>
+        <li><a href="#sec:meta" id="toc-sec:meta"><span
+        class="toc-section-number">6</span> Meta-data</a>
+        <ul>
+        <li><a href="#sec:requirements" id="toc-sec:requirements"><span
+        class="toc-section-number">6.1</span> Requirements</a></li>
+        <li><a href="#sec:data-model" id="toc-sec:data-model"><span
+        class="toc-section-number">6.2</span> Data model</a>
+        <ul>
+        <li><a href="#sec:overview-1" id="toc-sec:overview-1"><span
+        class="toc-section-number">6.2.1</span> Overview</a></li>
+        <li><a href="#sec:encapsulation"
+        id="toc-sec:encapsulation"><span
+        class="toc-section-number">6.2.2</span> Encapsulation</a></li>
+        </ul></li>
+        <li><a href="#sec:relations-with-iso-28258-entities"
+        id="toc-sec:relations-with-iso-28258-entities"><span
+        class="toc-section-number">6.3</span> Relations with ISO 28258
+        entities</a></li>
+        </ul></li>
+        <li><a href="#sec:oper" id="toc-sec:oper"><span
+        class="toc-section-number">7</span> Operational aspects</a>
+        <ul>
+        <li><a href="#sec:migrations" id="toc-sec:migrations"><span
+        class="toc-section-number">7.1</span> Migrations</a></li>
+        <li><a href="#sec:oper:integr" id="toc-sec:oper:integr"><span
+        class="toc-section-number">7.2</span> Integrating modifications
+        to downstream databases</a></li>
+        </ul></li>
+        <li><a href="#sec:future" id="toc-sec:future"><span
+        class="toc-section-number">8</span> Future work</a>
+        <ul>
+        <li><a href="#sec:uncertainties"
+        id="toc-sec:uncertainties"><span
+        class="toc-section-number">8.1</span> Uncertainties</a></li>
+        <li><a
+        href="#sec:maintaining-the-downstream-synchronicity-to-iso-28258"
+        id="toc-sec:maintaining-the-downstream-synchronicity-to-iso-28258"><span
+        class="toc-section-number">8.2</span> Maintaining the downstream
+        synchronicity to ISO 28258</a></li>
+        <li><a href="#sec:acknowledgment"
+        id="toc-sec:acknowledgment">Acknowledgment</a></li>
+        </ul></li>
+        <li><a href="#sec:bibliography"
+        id="toc-sec:bibliography">Bibliography</a></li>
+        </ul>
+
+        </div>
+      </div>
+            <div class="span9">
+
+                <H1>Abstract</H1>
+          <p>This document introduces a generic data model developed at
+          ISRIC implementing the ISO 28258 standard. Furthermore, the
+          data model captures the extensive code-lists gathered in the
+          GloSIS web ontology as thesauri. This data model is intended
+          as a template to be specialised in particular projects or use
+          cases. Soils4Africa was the first of such projects. Details
+          are given on how model classes and associations were
+          translated into tables and relations, together with
+          maintenance and development guidelines.</p>
+      
+      <h3 class="unnumbered" id="sec:copyright">Copyright</h3>
+<p>Copyright (C) 2022-2023 ISRIC - World Soil Information</p>
+<p>This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by the
+Free Software Foundation, either version 3 of the License, or (at your
+option) any later version.</p>
+<p>This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License
+along with this program. If not, see <a
+href="https://www.gnu.org/licenses/"
+class="uri">https://www.gnu.org/licenses/</a>.</p>
+<h1 data-number="1" id="sec:intro"><span
+class="header-section-number">1</span> Introduction</h1>
+<h2 data-number="1.1" id="sec:motivation"><span
+class="header-section-number">1.1</span> Motivation</h2>
+<p>In late 2021 a requirement emerged in the Soils4Africa project for a
+relational database model directed at the storage of soil properties
+observations. At first, the data model of the World Soil Information
+Service (WoSIS) was considered. However, this path presented an
+insurmountable challenge from the onset, as the WoSIS data model was
+developed <em>ad hoc</em>, unrelated to the state-of-the-art in soil
+ontology. In addition, this data model does not always follows best
+practices in SQL and relational database modelling. Among the issues
+with the WoSIS data model, the following can be highlighted:</p>
+<ul>
+<li>absence of thesauri or other mechanisms for controlled content;</li>
+<li>data type mismatches, e.g. numerical values stored in text
+fields;</li>
+<li>functional dependencies (marked with the concept of
+“attribute”);</li>
+<li>unclear semantics (in the data model and documentation).</li>
+</ul>
+<p>While not the most severe issue, the lack of controlled thesauri
+renders the WoSIS data model nearly unusable outside the context for
+which it was developed. The other issues carry risks for maintenance and
+data accuracy that can easily become too expensive to address.</p>
+<h2 data-number="1.2"
+id="sec:the-option-for-an-international-standard"><span
+class="header-section-number">1.2</span> The option for an international
+standard</h2>
+<p>A second path was thus considered, developing a more general data
+model following the state-of-the-art in soil ontology. Several models
+have been proposed as basis for the exchange of soil data that offer a
+starting point for a data model. No thorough comparison was undertaken
+between the different options, the domain model proposed in the ISO
+28258 standard was adopted outright for a first prototype. ISO 28258 is
+the only truly international standard directed at soil data exchange,
+with the alternatives being primarily regional in nature (e.g. INSPIRE,
+ANZSoilML). Soils4Africa taking place in a different continent, and with
+the goal of a generic data model in mind, the international model was
+the default choice. Further details on how these different models
+compare are offered in Section 2.2.</p>
+<p>The ISO 28258 domain model provides a “shell” architecture meant to
+be specialised for particular contexts. Initial data model prototyping
+proved that to be the case. Moreover, the parenthood of ISO 28258 to the
+GloSIS web ontology also facilitated the use of controlled content
+referenceable on the web.</p>
+<h2 data-number="1.3" id="sec:structure"><span
+class="header-section-number">1.3</span> Structure</h2>
+<p>This document is structured as follows. Section 2 briefly presents
+the ISO 28258 standard and the domain model it proposes, also comparing
+with other relevant models in soil ontology. The features of interest
+included in the data model are introduced next, in Section 3, after
+which the observations and measurements assets are presented in Section
+4. Section 5 details the procedures employed to populate the thesauri
+and their intended use. Meta-data is addressed in Section 6. Some
+relevant operational aspects of the data model are discussed in Section
+7. The document concludes by pointing directions for future work in
+Section 8.</p>
+<h2 data-number="1.4" id="sec:format"><span
+class="header-section-number">1.4</span> Format</h2>
+<p>This document is encoded with the Markdown language, meant to be
+compiled with the Pandoc system <a href="#fn1" class="footnote-ref"
+id="fnref1" role="doc-noteref"><sup>1</sup></a>. It is maintained within
+the <code>iso28258</code> repository itself <a href="#fn2"
+class="footnote-ref" id="fnref2"
+role="doc-noteref"><sup>2</sup></a>.</p>
+<h2 data-number="1.5" id="sec:glossary"><span
+class="header-section-number">1.5</span> Glossary</h2>
+<ul>
+<li><strong>Data model</strong>: a logical structure for the storage of
+a data (usually in a digital system). In most cases a data model
+implements the informational aspect of a domain model. In this document
+relations in a data model are represented with lower case e.g.,
+<code>element</code>.</li>
+<li><strong>Domain Model</strong>: an abstraction synthesising the
+information (and in some cases behaviour) of a specific domain. Often
+represented with a visual language like UML. A domain model can also be
+referred as “ontology”. In this document classes or concepts in a domain
+model are represented with capital characters,
+e.g. <code>SoilElement</code>.</li>
+<li><strong>Feature of Interest</strong>: a class in the Observations
+and Measurements domain model representing the subject of an observation
+or measurement. I.e. what is meant to be observed.</li>
+<li><strong>Observations and Measurements (O&amp;M)</strong>: a standard
+sanctioned by ISO and the OGC providing a domain model for information
+captured with human instruments and methods on natural phenomena.</li>
+<li><strong>ontology</strong>: an information abstraction resulting from
+the application of Ontology principles to the information/computer
+science domain. Expressed with lower case “o”, an ontology is a domain
+model, usually not including behavioural aspects.</li>
+<li><strong>Semantic Web</strong>: network of standard and
+specifications issue by the OGC for the digital exchange of data over
+the internet. It includes the Unified Resource Identifier (URI), the
+Resource Description Framework (RDF), the Web Ontology Language (OWL),
+the SPARQL query language and much more.</li>
+<li><strong>Thesaurus</strong>: a controlled set of terms that may be
+associated to a specific class property or table column. E.g. the set
+(<em>red</em>, <em>green</em>, <em>blue</em>) would be a thesaurus for
+the <em>colour</em> property. The concept of thesaurus is close to those
+of code-lists and vocabulary.</li>
+</ul>
+<h1 data-number="2" id="sec:28258"><span
+class="header-section-number">2</span> The ISO 28258 domain model</h1>
+<h2 data-number="2.1" id="sec:overview"><span
+class="header-section-number">2.1</span> Overview</h2>
+<p>The international standard “Soil quality - Digital exchange of
+soil-related data” (ISO number 28258) <span class="citation"
+data-cites="ISO-28258">(<span>“<span class="nocase">Soil quality –
+Digital exchange of soil-related data</span>”</span> 2013)</span> is the
+result of a joint effort by the ISO technical committee “Soil quality”
+and the technical committee “Soil characterisation” of the European
+Committee for Standardisation (CEN). Recognising a growing need to
+combine soil data with other types of data - especially environmental -
+these committees set out to produce a general framework for the
+unambiguous recording and exchange of soil data, consistent with other
+international standards and independent of particular software
+systems.</p>
+<p>The ISO 28258 standard was from the onset developed to target an XML
+based implementation. Its goal was not necessarily to attain a common
+understanding of the domain, rather to design a digital soil data
+exchange infrastructure. Therefore the accompanying UML domain model on
+which the XML exchange schema is rooted was merely a means to an end.
+Also recognising the relevance of spatial positioning in soil data, the
+standard adopted the Geography Markup Language (GML) as a geo-spatial
+extension to the XML encoding.</p>
+<p>Even though not necessarily focused on a domain model, ISO 28258
+captures a relatively wide range of concepts from soil surveying and
+physio-chemical analysis. The domain model is a direct application of
+the meta-model proposed in the Observations and Measurements (O&amp;M)
+standard <span class="citation" data-cites="ISO-19156">(<span>“<span
+class="nocase">Geographic information – Observations and
+measurements</span>”</span> 2011)</span> to the soil domain. It aims to
+support both analytical and descriptive results.</p>
+<p>ISO 28258 identifies the following features of interest:</p>
+<ul>
+<li><code>Site</code> - representing the surrounding environment of a
+soil investigation, the subject of observations such as terrain or land
+use.</li>
+<li><code>Plot</code> - the location or spatial feature where a soil
+investigation is conducted, usually leading to a soil profile
+description and/or to the collection of soil material for
+physio-chemical analysis. <code>Plot</code> is further specialised into
+<code>Surface</code>, <code>TrialPit</code> and
+<code>Borehole</code>.</li>
+<li><code>Profile</code> - an ordered set of soil horizons or layers
+comprising the soil pedon at a specific spatial location. The object of
+soil classification.</li>
+<li><code>ProfileElement</code> - an element of a soil profile,
+characterised by an upper and lower depth. Specialised into
+<code>Horizon</code> - a pedo-genetically homogeneous segment of the
+soil profile - and <code>Layer</code> - an arbitrary and heterogeneous
+segment of the soil profile.</li>
+<li><code>SoilSpecimen</code> - an homogenised sample of soil material
+collected at a specific soil depth. Usually meant for physio-chemical
+analysis.</li>
+</ul>
+<p>Figure 1 presents a simplified diagram of the ISO 28258 domain model
+showing the relevant relations between features of interest.</p>
+<figure>
+<img src="diagrams/iso-28258.png" id="fig:iso:simple"
+alt="Figure 1: Simplified UML class diagram with ISO 28258 features of interest." />
+<figcaption aria-hidden="true">Figure 1: Simplified UML class diagram
+with ISO 28258 features of interest.</figcaption>
+</figure>
+<p>Meant as an asset for global use, ISO 28258 did not went into further
+specialisation. It does not propose attribute catalogues, vocabularies
+or code-lists of any kind, remaining open to the different soil
+description and classification systems used around the world. Although
+specifying a class for the traditional concept of “mapping soil unit”
+used in vector based soil mapping, the standard does not actually
+support the raster data paradigm. ISO 28258 was conceived as an empty
+container, to be subject of further specialisation for the actual
+encoding of soil data (possibly at regional or national scale). However,
+the standard has so far never been applied in this context it was
+designed for. The combination of a XML/GML approach (for which
+off-the-shelf tools remain scant) with the lack of code-lists possibly
+made the outright adoption of this standard too abstract for soil data
+providers.</p>
+<h2 data-number="2.2" id="sec:28258:relation"><span
+class="header-section-number">2.2</span> Relation with other soil
+ontologies</h2>
+<p>The ISO 28258 domain model is semantically rooted in O&amp;M (see
+Section 4 for details), re-using UML stereotypes from that standard
+throughout. This architecture automatically aligns ISO 28258 with other
+standards from ISO and the OGC, such as Sampling Features. Moreover, it
+also provides alignment with other soil ontologies that follow a similar
+philosophy.</p>
+<h3 data-number="2.2.1" id="sec:inspire-soil-theme"><span
+class="header-section-number">2.2.1</span> INSPIRE Soil Theme</h3>
+<p>Perhaps the most relevant among the domain models related to ISO
+28258 is the Soil Theme domain model published by the European
+Commission in the context of the INSPIRE directive <span
+class="citation" data-cites="INSPIRE-Soil">(Soil 2013)</span>. The core
+of these two models, concerning the abstraction of observations and
+measurements is by and large the same, with the concept of
+<code>Observation</code> expressed as a triple: <code>Property</code>,
+<code>Procedure</code> and <code>Unit</code>. As for the features of
+interest there are differences mainly in how the spatial surrounding of
+a soil investigation is abstracted. The concepts of <code>Plot</code>
+and <code>Site</code> are also present in INSPIRE but in a leaner way,
+without the specialisations found in ISO 28258. INSPIRE further adds the
+concept of <code>SoilBody</code>, a wider spatial area in which various
+soil investigations are conducted. And the concepts of
+<code>RectifiedGridCoverage</code> and
+<code>ReferenceableGridCoverage</code> provide a back-bone for gridded
+data.</p>
+<h3 data-number="2.2.2" id="sec:ogc-soilie"><span
+class="header-section-number">2.2.2</span> OGC SoilIE</h3>
+<p>In 2016 the OGC hosted an initiative named Soil Interoperability
+Experiment (SoilIE) <span class="citation"
+data-cites="OGC-SoilIE">(<span>“<span>OGC Soil Data Interoperability
+Experiment</span>”</span> 2016)</span> with similar goals to those of
+ISO 28258. Also focused on data exchange, SoilIE would go into far more
+detail concerning features of interest. The resulting domain model is
+sub-divided into four sub-models, each addressing a specific aspect of
+soil information: (i) soil classification; (ii) soil profile
+description; (iii) sampling and field/laboratory observations; and (iv)
+sensor-based monitoring of dynamic soil properties. Left out of the
+experiment were soil mapping and landscape/land-use
+characterisation.</p>
+<p>The SoilIE domain model yields familiar concepts such as
+<code>Site</code>, <code>Plot</code>, <code>Soil</code>,
+<code>Layer</code>, <code>Horizon</code> or <code>Sample</code>. But
+these are complemented by many other classes, in what is a far broader
+set of features of interest, with more intricate relationships. However,
+to what observations and measures is concerned, the same patterns
+proposed in the O&amp;M standard are applied in this domain model
+too.</p>
+<h3 data-number="2.2.3" id="sec:glosis"><span
+class="header-section-number">2.2.3</span> GloSIS</h3>
+<p>The GloSIS web ontology is essentially a translation of the ISO 28258
+domain model to the Semantic Web, employing the Ontology Web Language
+(OWL). While semantically it is the same model, GloSIS introduces large
+sets of ready to use code-lists, including:</p>
+<ul>
+<li><p>Descriptive properties values (transposed from the FAO Guidelines
+of Soil Description <span class="citation" data-cites="Jahn2006">(Jahn
+et al. 2006)</span>).</p></li>
+<li><p>Physio-chemical properties (for Layer, Horizon, Plot and
+Profile).</p></li>
+<li><p>Procedures associated with physio-chemical properties (re-used
+from the Africa Soil Profiles project <span class="citation"
+data-cites="Leenaars2014">(Leenaars, Van Oostrum, and Ruiperez Gonzalez
+2014)</span>).</p></li>
+</ul>
+<p>By adopting the Semantic Web paradigm, this ontology automatically
+expresses all its content with Universal Resource Identifiers (URIs),
+than can easily be rendered dereferencable with a service such as W3ID
+<span class="citation" data-cites="w3id">(Group 2022)</span>. The GloSIS
+web ontology has in this way become one of the most extensive resources
+on soil ontology on the web.</p>
+<h2 data-number="2.3" id="sec:issues-identified"><span
+class="header-section-number">2.3</span> Issues identified</h2>
+<p>During the course of this work various issues were identified with
+the ISO domain model that required addressing in the adaptation to the
+Soils4Africa project. In particular:</p>
+<ol type="1">
+<li><p>The <code>Surface</code> and <code>Site</code> concepts revealed
+too similar and difficult to distinguish by soil scientists. Although
+yielding slightly different properties, the domain model is not fully
+clear. Moreover, a polygon type of spatial feature is expected to have a
+one-to-one relation with a <code>Profile</code>.</p></li>
+<li><p>The <code>SoilSpecimen</code> concept is defined with a single
+depth property, whereas in soil surveying a sample collected in the
+field is always reported with two depths (upper and lower boundaries). A
+specimen (or sample) is regarded as a tangible segment of the soil
+profile whose material is homogenised.</p></li>
+<li><p><code>SoilSpecimen</code> and <code>Layer</code> appear also as
+too similar concepts. Both report to an arbitrary segment or stratum of
+the soil profile, in most cases unrelated to pedo-genetic horizon
+boundaries. Moreover, soil properties assessed in laboratories from soil
+specimens are often reported in reference to a soil layer by data
+providers. The depth issue noted above blurs the distinction between the
+two concepts even further.</p></li>
+</ol>
+<h1 data-number="3" id="sec:foi"><span
+class="header-section-number">3</span> Features of Interest</h1>
+<h2 data-number="3.1" id="sec:general"><span
+class="header-section-number">3.1</span> General</h2>
+<p>The ISO 28258 domain model was translated into a relational data
+model in the most seamless way possible. Whenever practical, classes and
+their attributes were translated directly into relations and attributes
+(or tables and columns). Generalisations were dealt with case-by-case,
+applying the child relations rules, i.e. creating individual entities
+for the children only if they bear diverse relations with other classes.
+This section reviews the entities and relationships implementing the
+features of interest (FoIs) and related assets.</p>
+<h2 data-number="3.2" id="sec:project-and-site"><span
+class="header-section-number">3.2</span> Project and Site</h2>
+<p>The first concept to introduce is that of <code>Project</code>, a
+general placeholder providing the context of the data collection
+activity. The ISO domain model considers this a prerequisite for the
+proper use or reuse of these data. Within a project one or more soil
+investigations take place. It can be a soil sampling campaign, a regular
+soil survey, or some other organised process of soil data collection.
+The table <code>project</code> contains a single field for the project
+name, exposing the open nature of this concept (Figure 2).</p>
+<p>A project can be related to one or more other projects. For instance,
+if a certain field campaign occurs at regular time intervals, the user
+might wish to record each as a single project, but related to others
+undertaken at a different time. Hierarchical relations can also be
+recorded this way, expressing a certain project as sub-project of
+another one. The table <code>project_related</code> provides the
+<code>role</code> field in which the user may express the nature of the
+relationship.</p>
+<p>A soil investigation takes place within a certain spatial area or
+extent: the <code>Site</code>. A site is not a spatial feature of
+interest, but provides the link between the spatial features of interest
+(<code>Plot</code>) to the <code>Project</code>. It can be expressed
+either as a location (point) or spatial extent (polygon). The fields
+<code>position</code> and <code>extent</code> in the <code>site</code>
+table provide for this information, being that only one may be non empty
+for each record.</p>
+<figure>
+<img src="diagrams/project-site.png" id="fig:foi:project"
+alt="Figure 2: Entity-Relationship diagram for the project and site entities." />
+<figcaption aria-hidden="true">Figure 2: Entity-Relationship diagram for
+the <code>project</code> and <code>site</code> entities.</figcaption>
+</figure>
+<h2 data-number="3.3" id="sec:spatial-features"><span
+class="header-section-number">3.3</span> Spatial Features</h2>
+<p>All features of interest in the ISO 28258 model relate to a site,
+directly or indirectly. It is not possible to express information
+without previously defining the spatial extent within which the soil
+investigation took place. A single site may host more than one
+investigation, thus assumed to have an heterogeneous soil
+composition.</p>
+<p>The soil investigation itself is conducted in a precise spatial
+location - the <code>Plot</code> - the first spatial feature of
+interest. The <code>Plot</code> can be of three different kinds:
+<code>Surface</code>, <code>Pit</code> or <code>Borehole</code>. The
+<code>Surface</code> corresponds spatially to a polygonal feature, a
+spatial extent within which the character of the soil tends to be
+homogeneous. <code>Surface</code> can express soil investigations
+recorded with high positional inaccuracy. The model also defines a
+hierarchical relation between surfaces.</p>
+<p>Both the <code>Borehole</code> and the <code>Pit</code> correspond to
+point type spatial features, translating locations recorded with good
+positional accuracy. A borehole represents soil investigations conducted
+with an auger or similar boring instrument, whereas a pit indicates a
+soil excavation activity. In practice, both <code>Borehole</code> and
+<code>Pit</code> yield the same properties and relations,
+undistinguishable as data structures.</p>
+<p>The <code>Plot</code> was thus modelled with two tables: one for the
+<code>Surface</code> and another - named <code>plot</code> - for
+<code>Borehole</code> and <code>Pit</code>. Both of these have a
+mandatory relation to a site. The <code>plot</code> table has a
+<code>Point</code> type column as spatial feature and
+<code>surface</code> a <code>Polygon</code> type column. As Figure 3
+shows, the <code>plot</code> table contains a different set of
+columns.</p>
+<p>The <code>plot</code> and <code>surface</code> tables provide the
+spatial hook on which to record a soil <code>Profile</code> (a vertical
+sequence of soil horizons). The resulting <code>profile</code> table is
+rather simple, yielding a <code>code</code> column and two foreign keys,
+one for <code>plot</code> and another for <code>surface</code>. A
+<code>CHECK</code> constraint forces one, and only one of these two
+foreign keys to be used simultaneously.</p>
+<p>Note the nature of the relation between <code>Plot</code> and
+<code>Profile</code> being one-to-many. Meaning that more than one
+profile can be associated with the same plot (of whatever kind). This
+kind of association is not meant to related profiles collected at
+different points in time to a same plot. In such case the two profiles
+would be in different projects and would thus relate to different
+plots.</p>
+<figure>
+<img src="diagrams/profile-plot.png" id="fig:foi:profile"
+alt="Figure 3: Entity-Relationship diagram for the profile and plot entities." />
+<figcaption aria-hidden="true">Figure 3: Entity-Relationship diagram for
+the <code>profile</code> and <code>plot</code> entities.</figcaption>
+</figure>
+<h2 data-number="3.4" id="sec:other-features-of-interest"><span
+class="header-section-number">3.4</span> Other Features of Interest</h2>
+<p>There are three further features that do not have spatial expression
+but still are passible or measurement. Two are the profile elements:
+<code>Layer</code> and <code>Horizon</code>, the third being the
+<code>SoilSpecimen</code>.</p>
+<p><code>Layer</code> and <code>Horizon</code> present a similar nature:
+a section of the soil profile starting and ending at defined depths.
+Each instance is recorded in a particular order, re-creating the full
+soil profile. Semantically, <code>Layer</code> and <code>Horizon</code>
+differ in their composition, the latter is homogeneous, the former
+heterogeneous. An horizon is identified by field observation, through
+sharp transitions of colour, composition or texture. Layer depths are
+usually pre-determined prior to field work. However, this difference
+does not translate into different properties or relations in the data
+model. Therefore, both <code>Layer</code> and <code>Horizon</code> are
+captured in a single table: <code>element</code>. The field
+<code>type</code> provides the means to distinguish between layer or
+horizon, if needed be. Figure 4 provides an overview of these
+relations.</p>
+<p>The simultaneous inclusion of the properties
+<code>upper_depth</code>, <code>lower_depth</code> and
+<code>order</code> rapports important redundancies that are worth
+noting. The depth fields are recorded as positive integers representing
+centimetres from the surface, increasing downwards. The data model
+forces <code>upper_depth</code> to be lower than
+<code>lower_depth</code>. However the model cannot prevent overlapping
+profile elements from being recorded. Likewise, it cannot guarantee
+consistency between <code>order</code> and the depth columns. These
+redundancies are translated from the domain model “as is” since they
+portray common practice in soil survey. For these issues to be fully
+addressed a business rules layer is necessary (e.g. with database stored
+procedures).</p>
+<p>The concept of <code>SoilSpecimen</code> in ISO 28258 is derived from
+the ISO 10381 standard for Soil Sampling <span class="citation"
+data-cites="iso10381">(Standardization Organization) 2002)</span>. In
+essence it is a portion of soil matter (implicitly assumed as
+homogeneous) collected at a certain depth, meant to be transported to a
+storage facility where it may be further prepared and analysed with
+different methods. It does not appear directly associated to any
+specific feature in the ISO 28258 domain model, but its parent structure
+in ISO 10381 indicates possible associations with spatial features that
+may function as sampling platforms. The WoSIS database includes a
+similar concept, <code>sample</code> that appears associated with a site
+or plot. The same approach was thus taken in the ISO 28258 data model
+with a one-to-many association between <code>plot</code> and
+<code>specimen</code>. An additional table,
+<code>specimen_prep_process</code>, provides essential attributes to
+record how a sample is transported and stored.</p>
+<figure>
+<img src="diagrams/element-specimen.png" id="fig:foi:element"
+alt="Figure 4: Entity-Relationship diagram for the element and specimen entities." />
+<figcaption aria-hidden="true">Figure 4: Entity-Relationship diagram for
+the <code>element</code> and <code>specimen</code>
+entities.</figcaption>
+</figure>
+<h1 data-number="4" id="sec:om"><span
+class="header-section-number">4</span> Observations &amp;
+Measurements</h1>
+<h2 data-number="4.1" id="sec:main-concepts"><span
+class="header-section-number">4.1</span> Main concepts</h2>
+<p>O&amp;M <span class="citation" data-cites="ISO-19156">(<span>“<span
+class="nocase">Geographic information – Observations and
+measurements</span>”</span> 2011)</span> presents a general framework to
+encode measurements of natural phenomena of any kind. The concept of
+<code>Observation</code> is at its core, in essence a triplet of three
+other concepts:</p>
+<ul>
+<li><p><code>Property</code>: an individual characteristic of a feature
+of interest. E.g. sand fraction in a profile element.</p></li>
+<li><p><code>Procedure</code>: an action performed on a feature of
+interest (or sampling feature) in order to measure a property. E.g.
+sieving with 2 mm and 0.05 mm grades.</p></li>
+<li><p><code>Unit of measure</code>: defines the magnitude of a
+measurement executed with a particular procedure on a property. E.g. per
+mille.</p></li>
+</ul>
+<p>The <code>Result</code> class provides the actual placeholder for
+measurement results. It refers to a feature of interest and an
+observation and provides a matching value. The nature of this value is
+left completely open, it can be of any kind.</p>
+<h2 data-number="4.2" id="sec:physio-chemical-observations"><span
+class="header-section-number">4.2</span> Physio-chemical
+Observations</h2>
+<p>Observations of physio-chemical properties of the soil provide a full
+introduction to the implementation of O&amp;M in a relational database.
+These observations produce numerical results and refer to relatively
+well known procedures of wet chemistry and related soil specimen
+treatment.</p>
+<p>The model proposed by O&amp;M can be transposed to a relational
+structure nearly literally, however, there is an important choice to
+make regarding the nature of the relevant feature of interest. Since
+<code>Result</code> ought to refer to a feature, it must be translated
+into as many relational tables as many different features of interest
+exist. Therefore corresponding result tables are necessary for
+<code>surface</code>, <code>plot</code>, <code>profile</code>,
+<code>element</code> and <code>specimen</code>.</p>
+<p>Considering physio-chemical observations, in practice only
+<code>Element</code> and <code>Specimen</code> yield observations of
+this nature, with numerical values as result. For <code>element</code>
+the observation tables include the suffix <code>_phys_chem</code>
+whereas for specimen it is <code>numerical_specimen</code>. If further
+features of interest come to require numerical observations this suffix
+system must be harmonised.</p>
+<p>The <code>observation</code> table is in essence a ternary
+association, with foreign keys to <code>property</code>,
+<code>procedure</code> and <code>results</code>. In addition the columns
+<code>value_min</code> and <code>value_max</code> provide an interval of
+admissible values to guarantee data consistency (e.g. per mille). Figure
+5 provides an overview of the observation assets for the
+<code>element</code> entity.</p>
+<p>The tables for <code>property</code>, <code>procedure</code> and
+<code>results</code> are thesauri, not meant for direct modification by
+users. They provide the controlled content in this segment of the data
+model. In all three tables the natural columns are a human readable
+<code>label</code> and an <code>uri</code> to an entry in an on-line
+controlled vocabulary. This configuration is specifically designed to
+align the data model with the GloSIS web ontology (details in Section
+5), but it also facilitates referencing other on-line sources of
+controlled content. The <code>procedure</code> table includes an
+additional foreign key to itself, for the encoding of hierarchical
+procedures, with different levels of detail.</p>
+<p>Closing this segment of the data model is the <code>result</code>
+table. It refers both to an <code>observation</code> and a feature of
+interest (<code>element</code> for <code>result_phys_chem</code> and
+<code>specimen</code> for <code>result_numeric_specimen</code>). A
+numeric column named <code>value</code> hosts the actual measurement. To
+each numerical result table a trigger is associated that on insertion or
+update verifies the value against the <code>value_min</code> and
+<code>value_max</code> columns in the associated observation. In case it
+is outside the admissible interval, an exception is raised and the value
+remains unchanged.</p>
+<figure>
+<img src="diagrams/observation_num.png" id="fig:om:numerical"
+alt="Figure 5: Entity-Relationship diagram for numerical observations on element." />
+<figcaption aria-hidden="true">Figure 5: Entity-Relationship diagram for
+numerical observations on <em>element</em>.</figcaption>
+</figure>
+<h2 data-number="4.3" id="sec:descriptive-observations"><span
+class="header-section-number">4.3</span> Descriptive Observations</h2>
+<p>Various of the soil properties assessed during field work provide
+qualitative or descriptive results from direct observation, dispensing
+laboratory analysis. Examples are water drainage or soil classification.
+Results from these observations are thus textual in nature, ideally in
+reference to controlled content sources.</p>
+<p>Compared to numerical observations, the main difference in the
+translation of the O&amp;M pattern to a relational model for descriptive
+observations is in the nature of the result, it becomes a reference
+(foreign key) to a thesaurus. A thesaurus provides a list of controlled
+terms or items, that as a rule may not be modified by system users.</p>
+<p>All features of interest can be subject to descriptive observations.
+Therefore the O&amp;M pattern is replicated to each one, with a suffix
+to the table making the distinction. An exception was opened to the
+procedures thesaurus. In this case a procedure is a publication (field
+manual, soil description guidelines, etc) of which few are expected and
+should apply equally to different features of interest. Figure 6
+presents the tables for the descriptive observations related to
+<code>Surface</code>, thus yielding the suffix <code>_surface</code>.
+Similar tables exist for <code>plot</code>, <code>profile</code> and
+<code>element</code>.</p>
+<p>A <code>property_desc</code> table provides the thesaurus for
+properties, just like in the numerical observations case.
+<code>thesaurus_desc</code> provides the additional controlled lists of
+descriptive terms to associate with properties.
+<code>procedure_desc</code> hosts then the thesaurus of publications.
+The <code>observation_desc</code> table relates these previous concepts
+in a ternary relationship as before.</p>
+<p>The <code>result_desc</code> table is simply composed by two
+references, one to the feature of interest and another to the
+observation. The latter is actually a composed foreign key with the
+primary keys of the property and the respective item in the descriptive
+thesaurus. A joint unique constraint is applied on the foreign keys to
+the feature of interest and the property, guaranteeing that only one
+result is recorded for each property of each feature of interest.</p>
+<figure>
+<img src="diagrams/observation_desc.png" id="fig:om:descriptive"
+alt="Figure 6: Entity-Relationship diagram for descriptive observations associated with the Surface feature of interest." />
+<figcaption aria-hidden="true">Figure 6: Entity-Relationship diagram for
+descriptive observations associated with the Surface feature of
+interest.</figcaption>
+</figure>
+<h1 data-number="5" id="sec:thes"><span
+class="header-section-number">5</span> Thesauri</h1>
+<h2 data-number="5.1" id="sec:glosis-code-lists"><span
+class="header-section-number">5.1</span> GloSIS code-lists</h2>
+<p>One of the advancements GloSIS brings to soil ontology is the
+introduction of comprehensive and structured code-lists. Making the best
+use of the Semantic Web, these code-lists are structured according the
+Simple Knowledge Ontology System (SKOS) <span class="citation"
+data-cites="miles2009skos">(Miles and Bechhofer 2009)</span> with each
+item fully de-referenceable. SKOS also makes these code-lists easily
+extendable.</p>
+<p>GloSIS currently comprises code-lists for three cases:</p>
+<ul>
+<li><p><strong>Descriptive property values</strong>: as digitised from
+the FAO Guidelines for Soil Description during the consultancy work for
+Pillar 5 of GSP <span class="citation"
+data-cites="SchleidtReznik2020">(Řezník and Schleidt 2020)</span>. Some
+830 codes are currently found in these code-lists.</p></li>
+<li><p><strong>Physio-chemical properties</strong>: in accordance to the
+Tier1/Tier2 inventory gathered within the Pillar 4 of GSP <span
+class="citation" data-cites="BatjesTier1-2">(Batjes, Kempen, and Egmond
+2019)</span>, comprising 80 individual items.</p></li>
+<li><p><strong>Physio-chemical procedures</strong>: adapted from the
+large catalogue assembled within the Africa Soil Profiles project (AfSP)
+<span class="citation" data-cites="Leenaars2014">(Leenaars, Van Oostrum,
+and Ruiperez Gonzalez 2014)</span>, currently totalling over 200
+individuals.</p></li>
+</ul>
+<p>Beyond these code-lists, the GloSIS ontology also embodies a large
+collection of descriptive soil properties. However, these are not
+modelled as code-lists, but rather as direct instances of the
+<code>Property</code> class from the SOSA ontology. Over 160 such
+properties currently exist in the ontology, across all features of
+interest.</p>
+<p>These collections of controlled content provide a wealth of
+information form which to start a soil information system or an <em>ad
+hoc</em> database as the one described in this document. The GloSIS
+ontology is currently hosted at the W3ID service set-up by the W3C <a
+href="#fn3" class="footnote-ref" id="fnref3"
+role="doc-noteref"><sup>3</sup></a>, guaranteeing an important level of
+resilience. Moreover, GloSIS remains in active development with
+accompanying tools that will facilitate the involvement of soil
+scientists.</p>
+<p>SoilIE attempted a similar approach to controlled content, also
+producing code-lists with dereferenceble items. However, these are no
+longer on-line so it is not possible to compare their
+implementation.</p>
+<h2 data-number="5.2" id="sec:sparql-transformations"><span
+class="header-section-number">5.2</span> SPARQL transformations</h2>
+<p>A series of transformations were created to obtain relational
+database records from the GloSIS ontology. They are coded as SPARQL
+queries and stored in the <code>sparql</code> folder of the code
+repository <a href="#fn4" class="footnote-ref" id="fnref4"
+role="doc-noteref"><sup>4</sup></a>. Each of these queries obtain as
+output a set of SQL <code>INSERT</code> instructions that for each
+code-list item create a counterpart record in the corresponding
+thesaurus in the database.</p>
+<p>The query in Listing 1 populates the thesaurus for descriptive
+properties associated with the <code>GL_Profile</code> class in GloSIS
+(<code>Profile</code> in ISO 28258). First, it identifies the relevant
+observations, those whose feature of interest is the
+<code>Gl_Profile</code> class (with the
+<code>sosa:hasFeatureOfInterest</code> predicate). Secondly, it
+identifies the associated properties with the
+<code>sosa:observedProperty</code> element. It then identifies the
+associated result and corresponding values code-list
+(<code>sosa:hasResult</code>). Using the <code>BIND</code> function the
+resulting SQL <code>INSERT</code> instruction is produced as a string.
+Similar SPARQL queries were developed for all other features of
+interest.</p>
+<div id="lst:thes:desc:prof" class="listing sparql">
+<p>Listing 1: SPARQL query transforming descriptive observations for the
+`GL_Profile` class into SQL `INSERT` instructions.</p>
+<pre class="sparql"><code>PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX sosa:  &lt;http://www.w3.org/ns/sosa/&gt;
+PREFIX skos:  &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+PREFIX glosis_su:  &lt;http://w3id.org/glosis/model/v1.0.0/profile#&gt;
+
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_su:GL_Profile .
+    ?rest_p owl:onProperty sosa:observedProperty . 
+    ?rest_p owl:hasValue ?prop .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT(&quot;INSERT INTO core.observation_desc_profile (property_desc_profile_id, thesaurus_desc_profile_id) VALUES ((SELECT property_desc_profile_id FROM core.property_desc_profile WHERE uri LIKE \&#39;&quot;, 
+                   ?prop, 
+                   &quot;\&#39;), (SELECT thesaurus_desc_profile_id FROM core.thesaurus_desc_profile WHERE uri LIKE \&#39;&quot;, 
+                   ?value, 
+                   &quot;\&#39;));&quot;) AS ?query)
+}</code></pre>
+</div>
+<p>Similar queries are used to obtain the <code>INSERT</code>
+instructions for the code-list values themselves, that populate the
+thesauri. In Listing 2 is again the case for the Profile feature of
+interest. The matching triples in the <code>WHERE</code> clause are
+essentially the same as in Listing 1.</p>
+<div id="lst:thes:desc:prof:cl" class="listing sparql">
+<p>Listing 2: SPARQL query transforming code-lists of descriptive
+observations values for the `GL_Profile` class into SQL `INSERT`
+instructions.</p>
+<pre class="sparql"><code>PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX sosa:  &lt;http://www.w3.org/ns/sosa/&gt;
+PREFIX skos:  &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+PREFIX glosis_pr:  &lt;http://w3id.org/glosis/model/v1.0.0/profile#&gt;
+
+SELECT ?query
+WHERE {
+    ?obs rdfs:subClassOf sosa:Observation .
+    ?obs rdfs:subClassOf ?rest_f .
+    ?obs rdfs:subClassOf ?rest_r .
+    ?rest_f owl:onProperty sosa:hasFeatureOfInterest .
+    ?rest_f owl:allValuesFrom glosis_pr:GL_Profile .
+    ?rest_r owl:onProperty sosa:hasResult .
+    ?rest_r owl:someValuesFrom ?code_list .
+    ?value a ?code_list .
+    ?value skos:prefLabel ?l .
+    BIND (CONCAT(&#39;INSERT INTO core.thesaurus_desc_profile (label, uri) VALUES (\&#39;&#39;, ?l,
+          &#39;\&#39;, \&#39;&#39;, ?value, &#39;\&#39;);&#39;) AS ?query)
+}</code></pre>
+</div>
+<p>Obtaining the physio-chemical properties for the profile element is a
+more straightforward operation (Listing 3). The parent observation class
+<code>glosis_lh:PhysioChemical</code> is used to identify all the
+properties linked by this kind of observation, then retrieving the human
+readable strings to include in the thesauri.</p>
+<div id="lst:thes:pc:prop" class="listing sparql">
+<p>Listing 3: SPARQL query transforming physio-chemical properties into
+SQL `INSERT` instructions.</p>
+<pre class="sparql"><code>PREFIX rdfs:  &lt;http://www.w3.org/2000/01/rdf-schema#&gt;
+PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX sosa:  &lt;http://www.w3.org/ns/sosa/&gt;
+PREFIX skos:  &lt;http://www.w3.org/2004/02/skos/core#&gt; 
+PREFIX glosis_lh:  &lt;http://w3id.org/glosis/model/v1.0.0/layerhorizon#&gt;
+
+SELECT DISTINCT ?query
+WHERE {
+    ?obs rdfs:subClassOf  glosis_lh:PhysioChemical .
+    ?obs rdfs:subClassOf ?rest_p .
+    ?rest_p owl:onProperty sosa:observedProperty .
+    ?rest_p owl:hasValue ?prop .
+    ?prop skos:prefLabel ?label
+    BIND (CONCAT(&#39;INSERT INTO core.property_phys_chem (label, uri) VALUES (\&#39;&#39;, ?label,
+          &#39;\&#39;, \&#39;&#39;, ?prop, &#39;\&#39;);&#39;) AS ?query)
+}</code></pre>
+</div>
+<p>The procedures thesaurus is the simplest to obtain, since all
+relevant items are instances of the SOSA class <code>Procedure</code>
+(Listing 4). However, in this case the can code-list is hierarchical and
+thus the SKOS predicate <code>broader</code> must be taken into account.
+Using the <code>OPTIONAL</code> function, the query generates an inner
+SQL <code>SELECT</code> query to identify the parent of each procedure,
+in case it exists.</p>
+<div id="lst:thes:pc:proc" class="listing sparql">
+<p>Listing 4: SPARQL query transforming physio-chemical analysis
+procedures into SQL `INSERT` instructions.</p>
+<pre class="sparql"><code>PREFIX owl:   &lt;http://www.w3.org/2002/07/owl#&gt;
+PREFIX sosa:  &lt;http://www.w3.org/ns/sosa/&gt;
+PREFIX skos:  &lt;http://www.w3.org/2004/02/skos/core#&gt;
+PREFIX glosis_proc: &lt;http://w3id.org/glosis/model/v1.0.0/procedure#&gt;
+
+SELECT ?query
+WHERE {
+    ?parent a sosa:Procedure .
+    ?uri a ?parent .
+    ?uri skos:prefLabel ?label .    
+    OPTIONAL {?uri skos:broader ?broader} .
+    BIND (CONCAT(&#39;INSERT INTO core.procedure_phys_chem (uri, label, broader_id) VALUES (\&#39;&#39;, ?uri,
+         &#39;\&#39;, \&#39;&#39;, ?label, &#39;\&#39;, (SELECT procedure_phys_chem_id FROM core.procedure_phys_chem WHERE uri LIKE \&#39;&#39;, 
+         ?broader ,&#39;\&#39;)  );&#39;) AS ?query)
+}</code></pre>
+</div>
+<h1 data-number="6" id="sec:meta"><span
+class="header-section-number">6</span> Meta-data</h1>
+<h2 data-number="6.1" id="sec:requirements"><span
+class="header-section-number">6.1</span> Requirements</h2>
+<p>O&amp;M does not consider meta-data directly, an aspect that is
+beyond the scope of the ontology. However, ISRIC identified the need to
+register individuals responsible for certain laboratory measurements and
+field observations. This information can be critical to keep track of
+laboratory work. Also regarding field work, this information can be
+crucial to trace irregularities and obtain clarification from the
+institutions involved.</p>
+<p>vCard, the meta-data ontology specified by the W3C <span
+class="citation" data-cites="iannella2014vcard">(Iannella and McKinney
+2014)</span> and the ISO 19115 standard for geo-spatial meta-data <span
+class="citation" data-cites="ISO-19115">(<span>“<span
+class="nocase">geographic information — metadata</span>”</span>
+2014)</span> were initially considered as semantic sources. The Dublin
+Core vocabulary <span class="citation"
+data-cites="baker2005maintaining">(Baker 2005)</span> was also taken
+into consideration. vCard came to be the main source as it matched
+closer the organisational information commonly related to soil
+surveys.</p>
+<h2 data-number="6.2" id="sec:data-model"><span
+class="header-section-number">6.2</span> Data model</h2>
+<h3 data-number="6.2.1" id="sec:overview-1"><span
+class="header-section-number">6.2.1</span> Overview</h3>
+<p>The current data model is primarily based on the vCard classes
+<code>Organisation</code>, <code>Individual</code> and
+<code>Address</code> with respective tables for each (Figure 7). An
+organisation is typically a set of individuals that work together
+towards a same goal (or set of goals), but its meaning can be taken more
+broadly depending on the context. In most countries organisations are
+legal entities. Semantically the relevance is in distinguishing the
+collective from an individual. Organisations have a name and can be
+contacted through an e-mail address or a telephone number. They also may
+have a URL locating them in the digital space. Organisations can be set
+up in a hierarchical fashion, through a parent-child relationship.
+Organisations can also be sub-divided in various units
+(<code>organisation_unit</code> table).</p>
+<p>The individual is a person, usually subject to a set of legal rights
+and obligations. The individual has a name and honorific title and can
+be contacted by e-mail or telephone. An individual can also have a URL
+to a web page of interest. Individuals can be part of an indefinite
+number of organisations (through the
+<code>organisation_individual</code> table). They may instead relate
+directly to a particular unit inside an organisation.</p>
+<p>The <code>address</code> table provides structure for physical postal
+addresses of individuals and organisations. Currently the relations to
+this table are one-to-many, allowing for various individuals to have the
+same address. This is a somewhat permissive structure, following the
+open nature of vCard, that may be made more restrictive if
+necessary.</p>
+<figure>
+<img src="diagrams/meta-data.png" id="fig:meta:er"
+alt="Figure 7: Entity-Relationship diagram for the meta-data tables." />
+<figcaption aria-hidden="true">Figure 7: Entity-Relationship diagram for
+the meta-data tables.</figcaption>
+</figure>
+<h3 data-number="6.2.2" id="sec:encapsulation"><span
+class="header-section-number">6.2.2</span> Encapsulation</h3>
+<p>The entities created for the meta-data model are stored in their own
+database schema, named <code>metadata</code>. This limits the number of
+tables in the main schema (named <code>core</code>) facilitating human
+interaction with the database and its documentation. Foreign keys from
+the <code>core</code> schema to the <code>metadata</code> schema provide
+the appropriate relations between the two.</p>
+<p>Not all database management systems (DBMS) implement the concept of
+schema laid out in the SQL standard. Some include the concept but do not
+provided standard interaction. Therefore this option for encapsulating
+the meta-data entities in their own schema limits the range of DBMS that
+can host this database.</p>
+<h2 data-number="6.3" id="sec:relations-with-iso-28258-entities"><span
+class="header-section-number">6.3</span> Relations with ISO 28258
+entities</h2>
+<p>With a meta-data data model established, relations with the ISO 28258
+entities were devised, reflecting expectations on the field work
+conducted within Soils4Africa and similar projects. These relations
+identify the organisations and individuals responsible for data
+collection and/or asset storage. A simple matrix of relations was
+developed to aid discussion with domain experts (Table 1).</p>
+<div id="tbl:meta:relations">
+<table>
+<caption>Table 1: Relationships between meta-data and ISO 28258
+entities.</caption>
+<thead>
+<tr class="header">
+<th></th>
+<th>Individual</th>
+<th>Organisation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Project</td>
+<td>None</td>
+<td>One or more</td>
+</tr>
+<tr class="even">
+<td>Plot</td>
+<td>One or more</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Surface</td>
+<td>One or more</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Profile</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Element</td>
+<td>None</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Specimen</td>
+<td>None</td>
+<td>One</td>
+</tr>
+<tr class="odd">
+<td>Results (Physio-Chemical)</td>
+<td>One</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>A project may involve one or more organisations responsible for
+conducting a survey, or any other kind of soil investigation, including
+one or more plots. Each plot is surveyed by one or more individuals that
+in principle must be present at location. This resulted in the tables
+<code>project_organisation</code>, <code>plot_individual</code> and
+<code>surface_individual</code>. The individuals associated with a plot
+are also responsible for all descriptive results gathered on the
+profiles and profile elements surveyed within the plot.</p>
+<p>Neither elements nor profiles refer to individuals or organisations.
+These entities are part of the investigation conducted on the plot and
+therefore associated to the respective individual. However, the
+specimens surveyors collect are sent to a storage facility hosted by an
+organisation that must be identified. It is also necessary to track
+individuals responsible for physio-chemical measurements conducted in
+laboratories. Hence a direct reference from this kind of result to the
+<code>individual</code> table.</p>
+<h1 data-number="7" id="sec:oper"><span
+class="header-section-number">7</span> Operational aspects</h1>
+<h2 data-number="7.1" id="sec:migrations"><span
+class="header-section-number">7.1</span> Migrations</h2>
+<p>The database documented in this manuscript is developed with the
+migrations framework from the Graphile project <a href="#fn5"
+class="footnote-ref" id="fnref5" role="doc-noteref"><sup>5</sup></a>.
+Migrations provide a versioning mechanism for the incremental
+development of a database. The tool facilitates rolling back and forth
+between different points in the development history, by applying or
+suppressing the SQL instructions that create the database structure.</p>
+<p>Listing 5 provides a simple example on how to deploy the ISO 28258
+database with <code>graphile-migrate</code>. First the repository is
+cloned from the code forge, then the <code>.env</code> file must be
+edited to point environmental variables to the correct database cluster.
+Finally the environmental variables are loaded to the session and the
+migrations are run.</p>
+<div id="lst:oper:deploy" class="listing bash">
+<p>Listing 5: Simple instruction set to deploy a new instance of the
+Soils4Africa database.</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">git</span> clone git@git.wur.nl:isric/databases/iso28258.git</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> iso28258</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="ex">vim</span> .env</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .env</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a><span class="ex">yarn</span> graphile-migrate migrate</span></code></pre></div>
+</div>
+<p>Further documentation on the use of <code>graphile-migrate</code> is
+beyond the scope of this manuscript. The main project
+<code>README</code> file includes basic instructions.</p>
+<h2 data-number="7.2" id="sec:oper:integr"><span
+class="header-section-number">7.2</span> Integrating modifications to
+downstream databases</h2>
+<p>The database document here is likely to evolve in the future, simply
+with the correction of bugs or the introduction of general requirements,
+as is the case with the <code>metadata</code> schema. Any modifications
+to the entities described in Section 3 through Section 6 must therefore
+percolate to any downstream databases, i.e. those developed from this
+template. This is best managed with migrate setup script, usually stored
+in the downstream <code>migrations/setup</code> folder. Modifications to
+the <code>iso28258</code> repository can then be reflected in this
+script. The steps to produce one are the following:</p>
+<ol type="1">
+<li><p>Apply the necessary modifications with a new migration in the
+<code>iso28258</code> repository.</p></li>
+<li><p>Create a new tag in the <code>iso28258</code> repository, marking
+a new release.</p></li>
+<li><p>Obtain a backup from the <code>iso28258</code> repository with
+the <code>pg_dump</code> tool, marking the resulting file with the
+version (e.g. <code>_v1.1</code>). This dump must include only the
+<code>core</code> and <code>metadata</code> schemas, ignore ownership
+and add data as <code>INSERT</code> instructions, as Listing 6
+exemplifies.</p></li>
+<li><p>Replace the setup script in the <code>migrations/setup</code>
+folder of the downstream repository.</p></li>
+<li><p>Update the <code>.gmrc</code> file in the downstream repository
+to load the new script (<code>"afterReset"</code> section).</p></li>
+<li><p>Fully re-run migrations in the downstream database
+(<code>reset</code> parameter).</p></li>
+</ol>
+<div id="lst:oper:dump" class="listing bash">
+<p>Listing 6: Dumping relevant schemas from the iso28258 database as
+set-up for a derived database.</p>
+<div class="sourceCode" id="cb6"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pg_dump</span> iso28258 <span class="at">--inserts</span> <span class="at">--no-owner</span> <span class="at">-n</span> core <span class="at">-n</span> metadata <span class="op">&gt;</span> iso28258_v1.1.sql</span></code></pre></div>
+</div>
+<h1 data-number="8" id="sec:future"><span
+class="header-section-number">8</span> Future work</h1>
+<h2 data-number="8.1" id="sec:uncertainties"><span
+class="header-section-number">8.1</span> Uncertainties</h2>
+<p>The estimation and recording of measurement uncertainties has been a
+topic of active research at ISRIC. However, this aspect has so far been
+left outside soil ontology initiatives. The absence of uncertainty
+elements in O&amp;M itself is a contributing factor to this state of
+affairs.</p>
+<p>Measurement uncertainty is likely associated with the procedures
+employed. Particularly those used in the laboratory, but so too in field
+observations. Beyond those, spectral models also carry intrinsic
+estimate uncertainties that can be relevant to store.</p>
+<p>In the data model, uncertainties are expected to be primarily
+associated with entities implementing Procedure-type classes of O&amp;M.
+However, other aspects may also warrant this kind of information.
+Positioning uncertainty is an example. Results themselves may be subject
+to uncertainties too, for instance to convey particular conditions to
+field work. This area of soil ontology likely requires further
+refinement in requirements before it can be introduced to the data
+model.</p>
+<h2 data-number="8.2"
+id="sec:maintaining-the-downstream-synchronicity-to-iso-28258"><span
+class="header-section-number">8.2</span> Maintaining the downstream
+synchronicity to ISO 28258</h2>
+<p>Once a downstream data model starts being used effectively, storing
+actual results records, the integration procedure with the parent ISO
+data model, described in Section 7.2, becomes less evident. Some
+modifications may be straightforward to apply in the same fashion,
+e.g. adding a new, nullable column to an existing table. But others may
+imply modifications to existing records, that do not fit within the
+existing procedure.</p>
+<p>Two approaches are possible to this issue. First is to devise an
+additional strategy to apply changes from the parent model without loss
+or corruption of data. This likely requires an additional backup and
+restore mechanism. The other approach is to simply let the two data
+models diverge. While not optimal, this latter approach is by far the
+cheapest, and if the parent model is not expected to evolve much
+further, it might not have much consequence.</p>
+<h2 class="unnumbered" id="sec:acknowledgment">Acknowledgment</h2>
+<table border="0">
+<tr>
+<td style="width: 60px">
+<img src="figures/EU.jpg" alt="European Research Council (ERC)" />
+</td>
+<td>
+This report is part of a project that has received funding from the
+European Union’s Horizon 2020 research and innovation programme under
+grant agreement No 862900.
+</td>
+</tr>
+</table>
+<h1 class="unnumbered" id="sec:bibliography">Bibliography</h1>
+<div id="refs" class="references csl-bib-body hanging-indent"
+role="doc-bibliography">
+<div id="ref-baker2005maintaining" class="csl-entry"
+role="doc-biblioentry">
+Baker, Thomas. 2005. <span>“Maintaining Dublin Core as a Semantic Web
+Vocabulary.”</span> In <em>From Integrated Publication and Information
+Systems to Information and Knowledge Environments</em>, 61–68. Springer.
+</div>
+<div id="ref-BatjesTier1-2" class="csl-entry" role="doc-biblioentry">
+Batjes, Niels, Bas Kempen, and Fenny van Egmond. 2019. <span>“<span
+class="nocase">Tier 1 and Tier 2 data in the context of the federated
+Global Soil Information System (GLOSIS)</span>.”</span> Report.
+Wageningen, NO: ISRIC - World Soil Information.
+</div>
+<div id="ref-ISO-19156" class="csl-entry" role="doc-biblioentry">
+<span>“<span class="nocase">Geographic information – Observations and
+measurements</span>.”</span> 2011. Standard. Vol. 2011. Geneva, CH:
+International Organization for Standardization.
+</div>
+<div id="ref-ISO-19115" class="csl-entry" role="doc-biblioentry">
+<span>“<span class="nocase">geographic information —
+metadata</span>.”</span> 2014. Standard. Vol. 2014. geneva, ch:
+international organization for standardization.
+</div>
+<div id="ref-w3id" class="csl-entry" role="doc-biblioentry">
+Group, W3C Permanent Identifier Community. 2022. <span>“Permanent
+Identifiers for the Web.”</span> 2022. <a
+href="https://w3id.org/">https://w3id.org/</a>.
+</div>
+<div id="ref-iannella2014vcard" class="csl-entry"
+role="doc-biblioentry">
+Iannella, Renato, and James McKinney. 2014. <span>“vCard Ontology-for
+Describing People and Organizations.”</span> <em>W3C Group Note
+NOTE-Vcard-Rdf-20140522</em>.
+</div>
+<div id="ref-Jahn2006" class="csl-entry" role="doc-biblioentry">
+Jahn, R, HP Blume, VB Asio, O Spaargaren, and P Schad. 2006.
+<em>Guidelines for Soil Description</em>. FAO.
+</div>
+<div id="ref-Leenaars2014" class="csl-entry" role="doc-biblioentry">
+Leenaars, Johan, Ad Van Oostrum, and Maria Ruiperez Gonzalez. 2014.
+<span>“<span>Africa Soil Profiles Database - Version 1.2</span>.”</span>
+ISRIC - World Soil Information;
+https://www.isric.org/documents/document-type/isric-report-201401-africa-soil-profiles-database-version-12.
+</div>
+<div id="ref-miles2009skos" class="csl-entry" role="doc-biblioentry">
+Miles, Alistair, and Sean Bechhofer. 2009. <span>“SKOS Simple Knowledge
+Organization System Reference.”</span> <em>W3C Recommendation</em>.
+</div>
+<div id="ref-OGC-SoilIE" class="csl-entry" role="doc-biblioentry">
+<span>“<span>OGC Soil Data Interoperability Experiment</span>.”</span>
+2016. Engineering Report. Vol. 2016. Open Geospatial Consortium.
+</div>
+<div id="ref-SchleidtReznik2020" class="csl-entry"
+role="doc-biblioentry">
+Řezník, T., and K. Schleidt. 2020. <span>“<span class="nocase">Data
+Model Development for the Global Soil Information System
+(GloSIS)</span>.”</span> GSP - Global Soil Parnership.
+</div>
+<div id="ref-INSPIRE-Soil" class="csl-entry" role="doc-biblioentry">
+Soil, INSPIRE Thematic Working Group. 2013. <span>“D2.8.III.3 INSPIRE
+Data Specification on Soil – Draft Guidelines.”</span> Standard.
+European Commission Joint Research Centre.
+</div>
+<div id="ref-ISO-28258" class="csl-entry" role="doc-biblioentry">
+<span>“<span class="nocase">Soil quality – Digital exchange of
+soil-related data</span>.”</span> 2013. Standard. Vol. 2013. Geneva, CH:
+International Organization for Standardization.
+</div>
+<div id="ref-iso10381" class="csl-entry" role="doc-biblioentry">
+Standardization Organization), ISO (International. 2002. <span>“Soil
+Quality—Sampling—Part 1: Guidance on the Design of Sampling Programmes.
+ISO 10381-1: 2002.”</span> ISO Geneva.
+</div>
+<div id="ref-baker2005maintaining" class="csl-entry"
+role="doc-biblioentry">
+Baker, Thomas. 2005. <span>“Maintaining Dublin Core as a Semantic Web
+Vocabulary.”</span> In <em>From Integrated Publication and Information
+Systems to Information and Knowledge Environments</em>, 61–68. Springer.
+</div>
+<div id="ref-BatjesTier1-2" class="csl-entry" role="doc-biblioentry">
+Batjes, Niels, Bas Kempen, and Fenny van Egmond. 2019. <span>“<span
+class="nocase">Tier 1 and Tier 2 data in the context of the federated
+Global Soil Information System (GLOSIS)</span>.”</span> Report.
+Wageningen, NO: ISRIC - World Soil Information.
+</div>
+<div id="ref-ISO-19156" class="csl-entry" role="doc-biblioentry">
+<span>“<span class="nocase">Geographic information – Observations and
+measurements</span>.”</span> 2011. Standard. Vol. 2011. Geneva, CH:
+International Organization for Standardization.
+</div>
+<div id="ref-ISO-19115" class="csl-entry" role="doc-biblioentry">
+<span>“<span class="nocase">geographic information —
+metadata</span>.”</span> 2014. Standard. Vol. 2014. geneva, ch:
+international organization for standardization.
+</div>
+<div id="ref-w3id" class="csl-entry" role="doc-biblioentry">
+Group, W3C Permanent Identifier Community. 2022. <span>“Permanent
+Identifiers for the Web.”</span> 2022. <a
+href="https://w3id.org/">https://w3id.org/</a>.
+</div>
+<div id="ref-iannella2014vcard" class="csl-entry"
+role="doc-biblioentry">
+Iannella, Renato, and James McKinney. 2014. <span>“vCard Ontology-for
+Describing People and Organizations.”</span> <em>W3C Group Note
+NOTE-Vcard-Rdf-20140522</em>.
+</div>
+<div id="ref-Jahn2006" class="csl-entry" role="doc-biblioentry">
+Jahn, R, HP Blume, VB Asio, O Spaargaren, and P Schad. 2006.
+<em>Guidelines for Soil Description</em>. FAO.
+</div>
+<div id="ref-Leenaars2014" class="csl-entry" role="doc-biblioentry">
+Leenaars, Johan, Ad Van Oostrum, and Maria Ruiperez Gonzalez. 2014.
+<span>“<span>Africa Soil Profiles Database - Version 1.2</span>.”</span>
+ISRIC - World Soil Information;
+https://www.isric.org/documents/document-type/isric-report-201401-africa-soil-profiles-database-version-12.
+</div>
+<div id="ref-miles2009skos" class="csl-entry" role="doc-biblioentry">
+Miles, Alistair, and Sean Bechhofer. 2009. <span>“SKOS Simple Knowledge
+Organization System Reference.”</span> <em>W3C Recommendation</em>.
+</div>
+<div id="ref-OGC-SoilIE" class="csl-entry" role="doc-biblioentry">
+<span>“<span>OGC Soil Data Interoperability Experiment</span>.”</span>
+2016. Engineering Report. Vol. 2016. Open Geospatial Consortium.
+</div>
+<div id="ref-SchleidtReznik2020" class="csl-entry"
+role="doc-biblioentry">
+Řezník, T., and K. Schleidt. 2020. <span>“<span class="nocase">Data
+Model Development for the Global Soil Information System
+(GloSIS)</span>.”</span> GSP - Global Soil Parnership.
+</div>
+<div id="ref-INSPIRE-Soil" class="csl-entry" role="doc-biblioentry">
+Soil, INSPIRE Thematic Working Group. 2013. <span>“D2.8.III.3 INSPIRE
+Data Specification on Soil – Draft Guidelines.”</span> Standard.
+European Commission Joint Research Centre.
+</div>
+<div id="ref-ISO-28258" class="csl-entry" role="doc-biblioentry">
+<span>“<span class="nocase">Soil quality – Digital exchange of
+soil-related data</span>.”</span> 2013. Standard. Vol. 2013. Geneva, CH:
+International Organization for Standardization.
+</div>
+<div id="ref-iso10381" class="csl-entry" role="doc-biblioentry">
+Standardization Organization), ISO (International. 2002. <span>“Soil
+Quality—Sampling—Part 1: Guidance on the Design of Sampling Programmes.
+ISO 10381-1: 2002.”</span> ISO Geneva.
+</div>
+</div>
+<section id="footnotes" class="footnotes footnotes-end-of-document"
+role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1"><p>https://pandoc.org/<a href="#fnref1"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2"><p>https://git.wur.nl/isric/databases/iso28258/doc<a
+href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn3"><p>https://w3id.org/glosis/model<a href="#fnref3"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li
+id="fn4"><p>https://git.wur.nl/isric/databases/iso28258/-/tree/master/sparql<a
+href="#fnref4" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn5"><p>https://github.com/graphile/migrate<a href="#fnref5"
+class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
+            </div>
+    </div>
+  </div>
+  <script src="https://vjs.zencdn.net/5.4.4/video.js"></script>
+
+</body>
+</html>

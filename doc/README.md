@@ -40,3 +40,14 @@ mmdc -i diagrams/iso-28258.mm -o diagrams/iso-28258.png
 
 mv diagrams/iso-28258.png ../public/diagrams/
 ```
+
+Deployment
+----------
+
+Currently this document is meant to be deployed with the [GitLab Pages]()
+feature.  The resulting contents are gathered in [../public](../public) folder.
+The file [../.gitlab-ci.yml](../.gitlab-ci.yml) contains the CI settings. This
+is currently a default, as the document is meant to be served as plain HTML. 
+
+GitLab provides an example [static HTML
+project](https://gitlab.com/pages/plain-html) with a full example.
