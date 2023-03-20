@@ -1,7 +1,7 @@
 Documentation for the ISO 28258
 ===============================
 
-This folder gathers the files documenting the data model for the ISO 28358
+This folder gathers the files documenting the data model for the ISO 28258
 standard developed at ISRIC. From this folder it is possible to produce a full
 report, either as an HTML page or a PDF document.
 
@@ -38,16 +38,16 @@ commands below show.
 ```
 mmdc -i diagrams/iso-28258.mm -o diagrams/iso-28258.png
 
-mv diagrams/iso-28258.png ../public/diagrams/
+cp diagrams/iso-28258.png ../public/diagrams/
 ```
 
 Deployment
 ----------
 
-Currently this document is meant to be deployed with the [GitLab Pages]()
-feature.  The resulting contents are gathered in [../public](../public) folder.
+Currently this document is meant to be deployed with the [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/)
+feature.  The resulting contents are gathered in the [../public](../public) folder.
 The file [../.gitlab-ci.yml](../.gitlab-ci.yml) contains the CI settings. This
-is currently a default, as the document is meant to be served as plain HTML. 
+is currently a default, since the document is meant to be served as plain HTML. 
 
 GitLab provides an example [static HTML
 project](https://gitlab.com/pages/plain-html) with a full example.
