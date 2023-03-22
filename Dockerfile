@@ -28,8 +28,6 @@ COPY doc /app
 
 COPY public /app
 
-COPY .pandoc /app
-
 WORKDIR /app
 
 RUN ./compile.sh html
