@@ -24,4 +24,17 @@ build:
   only:
     - master
 
+deploy:
+  image: harbor.containers.wurnet.nl/proxy-cache/library/alpine:3.15.0@sha256:e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3
+  stage: deploy
+  before_script:
+    - apk add curl
+  script: 
+    - echo "deploy-master; $CI_COMMIT_SHORT_SHA"
+    - curl -X POST -F token=${DEPLOY_TOKEN} -F "ref=master" -F "variables[VERSION_TAG]=$CI_COMMIT_SHORT_SHA" -F "variables[ENVIRONMENT]=production" -F "variables[PROJECT]=iso28258" https://git.wur.nl/api/v4/projects/7515/trigger/pipeline
+  only:
+    - master
+  environment:
+    name: production
+
 
