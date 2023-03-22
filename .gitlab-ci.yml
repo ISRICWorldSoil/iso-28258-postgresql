@@ -1,24 +1,13 @@
 stages:
   - build
+  - deploy
 
-
-######
-# build stage
-# build a new container and push to harbor
 build:
   stage: build
-  image:
+  image: 
     name: gcr.io/kaniko-project/executor:debug
     entrypoint: [""]
   when: on_success
-  only:
-    refs:
-      - master
-    variables:
-      - $CI_COMMIT_TITLE =~ /^RELEASE:.+$/
-  dependencies:
-
-
   script:
     - "export RELEASE_VERSION=$(echo $CI_COMMIT_MESSAGE | cut -f2- -d: | tr -d ' ')"
     - echo "RELEASE_VERSION; $RELEASE_VERSION"
@@ -30,4 +19,6 @@ build:
     - echo "build; $RELEASE_VERSION/$CI_COMMIT_SHORT_SHA/$CI_COMMIT_REF_NAME"
     - if [ -z $RELEASE_VERSION ]; then /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $HARBOR_REGISTRY/$HARBOR_PROJECT/iso28258:$CI_COMMIT_SHORT_SHA --destination $HARBOR_REGISTRY/$HARBOR_PROJECT/iso28258:latest;  else /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $HARBOR_REGISTRY/$HARBOR_PROJECT/iso28258:$RELEASE_VERSION --destination $HARBOR_REGISTRY/$HARBOR_PROJECT/iso28258:latest; fi
 
+  only:
+      - master
 
