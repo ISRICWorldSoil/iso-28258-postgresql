@@ -13,11 +13,11 @@ build:
   when: on_success
   only:
     refs:
-      - main
+      - master
     variables:
       - $CI_COMMIT_TITLE =~ /^RELEASE:.+$/
   dependencies:
-    - tag
+
 
   script:
     - "export RELEASE_VERSION=$(echo $CI_COMMIT_MESSAGE | cut -f2- -d: | tr -d ' ')"
