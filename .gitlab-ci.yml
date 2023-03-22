@@ -1,13 +1,20 @@
-image: busybox
+stages:
+  - build
 
-pages:
-  stage: deploy
+build:
+  stage: build
+  image: 
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  when: on_success
   script:
-  - echo 'Nothing to do...'
-  artifacts:
-    paths:
-    - public
-    expire_in: 1 day
-  rules:
-    - if: $CI_COMMIT_REF_NAME == $CI_DEFAULT_BRANCH
+  # adding the credencials for kaniko to use for pull/push from harbour 
+    - export RELEASE_VERSION=$CI_COMMIT_SHORT_SHA
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$HARBOR_REGISTRY\":{\"username\":\"$HARBOR_USER_TEST\",\"password\":\"$HARBOR_PASSWORD_TEST\"}}}" > /kaniko/.docker/config.json
+    - echo "Harbour destination; $HARBOR_REGISTRY/$HARBOR_PROJECT_TEST/$CI_PROJECT_NAME:$RELEASE_VERSION"
+    - /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile --destination $HARBOR_REGISTRY/$HARBOR_PROJECT_TEST/$CI_PROJECT_NAME:$RELEASE_VERSION
+    - if [ -z $RELEASE_VERSION ]; then echo "No release version number available. No staging build"; else /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile  --destination $HARBOR_REGISTRY/$HARBOR_PROJECT_TEST/$CI_PROJECT_NAME:$RELEASE_VERSION --destination $HARBOR_REGISTRY/$HARBOR_PROJECT_TEST/$CI_PROJECT_NAME:latest; fi
 
+  only:
+      - master
