@@ -1,3 +1,15 @@
+stages:
+  - build
 
+build:
+  stage: build
+  image:
+    name: pandoc/latex
+    entrypoint: [""]
+  when: on_success
+  script:
+      - pandoc -f markdown -t html -o public/index.html doc/*.md
 
+  only:
+      - master
 
