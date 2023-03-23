@@ -18,6 +18,12 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <[https://www.gnu.org/licenses/](https://www.gnu.org/licenses/)>.
 
+
+Recommended citation
+--------------------
+
+de Sousa, L. M., Calisto, L., van Genuchten P., Turdukulov, U., Kempen, B., 2023. Data model for the ISO 28258 domain model. ISRIC World Soil Information. Available at: [https://iso28258.isric.org/](https://iso28258.isric.org/)
+
 Concepts included
 -----------------
 
