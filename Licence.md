@@ -27,8 +27,10 @@ Finally, every program is threatened constantly by software patents. States shou
 
 The precise terms and conditions for copying, distribution and modification follow.
 
-##TERMS AND CONDITIONS
-###0. Definitions.
+## TERMS AND CONDITIONS
+
+### 0. Definitions.
+
 “This License” refers to version 3 of the GNU General Public License.
 
 “Copyright” also means copyright-like laws that apply to other kinds of works, such as semiconductor masks.
