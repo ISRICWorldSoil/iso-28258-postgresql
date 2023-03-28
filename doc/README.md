@@ -44,10 +44,16 @@ cp diagrams/iso-28258.png ../public/diagrams/
 Deployment
 ----------
 
-Currently this document is meant to be deployed with the [GitLab Pages](https://docs.gitlab.com/ee/user/project/pages/)
-feature.  The resulting contents are gathered in the [../public](../public) folder.
-The file [../.gitlab-ci.yml](../.gitlab-ci.yml) contains the CI settings. This
-is currently a default, since the document is meant to be served as plain HTML. 
+Deployment is done by building the docker image from the Dockerfile at project root level
 
-GitLab provides an example [static HTML
-project](https://gitlab.com/pages/plain-html) with a full example.
+```bash
+docker build --no-cache -t iso28258 .
+```
+
+Docker build will run command `./compile.sh html` and move the build contents to an nginx image that will then serve `index.html`
+
+```bash
+docker run -p8080:8080 iso28258
+```
+
+Access to content on local host: `http://localhost:8080`
