@@ -31,7 +31,7 @@ then
       -M date="`date "+%B%e, %Y"`" \
       --bibliography=Biblio.bib --citeproc \
       --template=easy_template.html \
-      -o ../app/index.html \
+      -o ../public/index.html \
       ${files}
 
 else
