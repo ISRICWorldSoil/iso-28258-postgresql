@@ -1,5 +1,5 @@
---! Previous: sha1:0d17d4114bf58a98bb78d7c1c8713a6fd17184df
---! Hash: sha1:8b49f4c556c7b90b6b816980b92b73e7bc05ecdc
+--! Previous: sha1:fdcb8ef6da91b6e93f8e56a91d478d3fe1e54bc7
+--! Hash: sha1:c8c8b36b4619213ef513f7a6a223cd2eb9febc72
 --! Message: Better descriptions for the thesaurus tables (closes #17)
 
 -- Enter migration here

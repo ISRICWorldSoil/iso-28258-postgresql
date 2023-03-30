@@ -1,10 +1,12 @@
---! Previous: sha1:63699086d88ebf55364f5685952bc5cf26a24bc0
---! Hash: sha1:810d7cec8f763a5833c48273736cede70d29bdf2
+--! Previous: sha1:b9d7712ae8e016f3ddad08868ad32b1e040309ad
+--! Hash: sha1:31f323326690ed633409553e5173a0748d1635b1
 --! Message: Modifies Specimen to create two depth fields (closes #13)
 
 -- Enter migration here
 
 ALTER TABLE core.specimen DROP COLUMN IF EXISTS depth;
+ALTER TABLE core.specimen DROP COLUMN IF EXISTS upper_depth;
+ALTER TABLE core.specimen DROP COLUMN IF EXISTS lower_depth;
 
 ALTER TABLE core.specimen ADD COLUMN upper_depth INTEGER NOT NULL;
 

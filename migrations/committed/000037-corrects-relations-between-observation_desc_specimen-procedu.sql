@@ -1,16 +1,20 @@
 --! Previous: sha1:6e4f9b01affa25f0c88cf558dd2d665091ca29f2
---! Hash: sha1:63699086d88ebf55364f5685952bc5cf26a24bc0
+--! Hash: sha1:b9d7712ae8e016f3ddad08868ad32b1e040309ad
 --! Message: Corrects relations between observation_desc_specimen, procedure_desc and result_desc_specimen
 
 -- Enter migration here
 
 DROP TABLE IF EXISTS core.result_desc_specimen;
 
+
 ALTER TABLE core.observation_desc_specimen 
  DROP CONSTRAINT IF EXISTS fk_observation_desc_specimen;
 
 ALTER TABLE core.observation_desc_specimen 
  DROP COLUMN IF EXISTS observation_desc_specimen_id;
+
+ALTER TABLE core.observation_desc_specimen 
+ DROP COLUMN IF EXISTS procedure_desc_id;
 
 ALTER TABLE core.observation_desc_specimen 
   ADD COLUMN procedure_desc_id INTEGER;
@@ -32,9 +36,6 @@ CREATE TABLE IF NOT EXISTS core.result_desc_specimen
         FOREIGN KEY (property_desc_specimen_id, thesaurus_desc_specimen_id)
         REFERENCES core.observation_desc_specimen (property_desc_specimen_id, thesaurus_desc_specimen_id)
 );
-
-ALTER TABLE IF EXISTS core.result_desc_specimen
-    OWNER to duque004;
 
 COMMENT ON TABLE core.result_desc_specimen
     IS 'Descriptive results for the Specimen feature interest.';

@@ -1,5 +1,5 @@
---! Previous: sha1:b57a9b5b3838aed113bcb19969ee4a780ca69316
---! Hash: sha1:b4a1e049de64cf731268c891bb5924ba8bfafb6e
+--! Previous: sha1:70e638b6587543aaf5f6869a501feaef9292ce32
+--! Hash: sha1:f2adbfcb10b7e36e34bd50d9fab542c670403701
 --! Message: Modifies relation between project and organisation to many-to-many (closes #23)
 
 -- Enter migration here

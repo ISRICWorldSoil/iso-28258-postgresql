@@ -1,5 +1,5 @@
---! Previous: sha1:457bf1d0cad19903130d5830718b6e77f9779ca7
---! Hash: sha1:d01fa494cdb9a27ccd377a8d304fd35daaac9b1c
+--! Previous: sha1:a2b72c713a38b5b8ede960a596a6b0bd2b042a06
+--! Hash: sha1:fc7caa8cf0122b9e4ca8d0569a8569590fca8824
 --! Message: Creates missing UNIQUE constraints (closes #20)
 
 -- Enter migration here

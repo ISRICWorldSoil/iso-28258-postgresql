@@ -6,7 +6,7 @@ node_modules
 *.swk
 *.swl
 *.swm
-
+*.swj
 
 # Yarn using Zero-Installs
 

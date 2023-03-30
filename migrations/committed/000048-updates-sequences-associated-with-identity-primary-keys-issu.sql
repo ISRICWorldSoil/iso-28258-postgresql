@@ -1,5 +1,5 @@
---! Previous: sha1:0fd9b97a305a2836215a416053816366ebe20b57
---! Hash: sha1:03bab9de6d34d9e5ff2f6d64cab3c84727538b89
+--! Previous: sha1:a23ee981beee66cda248a8c50805d23a841bc0ec
+--! Hash: sha1:b1bbaddedb0cf78e301de48918813c510238f3fe
 --! Message: Updates sequences associated with IDENTITY primary keys (issue #21)
 
 -- Enter migration here

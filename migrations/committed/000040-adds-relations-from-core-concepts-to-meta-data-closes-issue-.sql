@@ -1,5 +1,5 @@
---! Previous: sha1:7a420f16c7548f52b3152de96a743835aea6cd2d
---! Hash: sha1:9287ea6ea576fcfd289a1f9a7526462ca58ad05a
+--! Previous: sha1:a32a1133975549dea1d85334a15d2d6489b4b2bb
+--! Hash: sha1:c90680791caaed4a91769aafb1b2a0a58d10fd7c
 --! Message: Adds relations from core concepts to meta-data (closes issue #12)
 
 -- Enter migration here
