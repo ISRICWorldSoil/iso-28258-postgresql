@@ -124,6 +124,6 @@ the Pandoc system [^4]. It is maintained within the `iso28258` repository itself
   those of code-lists and vocabulary.
 
 
-[^3]: https://git.wur.nl/isric/databases/iso28258/doc
+[^3]: https://git.wur.nl/isric/databases/iso28258/-/tree/master/doc
 
 [^4]: https://pandoc.org/ 

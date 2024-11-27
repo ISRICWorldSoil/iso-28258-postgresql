@@ -2,7 +2,7 @@
   "name": "wosis",
   "packageManager": "yarn@3.1.1",
   "version": "1.0.0",
-  "description": "WoSIS monorepo",
+  "description": "iso25258 ISRIC implementation",
   "repository": {
     "type": "git",
     "url": "ssh://git@git.wur.nl:isric/databases/wosis.git"

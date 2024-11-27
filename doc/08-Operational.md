@@ -15,7 +15,7 @@ from the code forge, then the `.env` file must be edited to point environmental
 variables to the correct database cluster. Finally the environmental variables
 are loaded to the session and the migrations are run.
 
-```{#lst:oper:deploy .bash caption="Simple instruction set to deploy a new instance of the Soils4Africa database."}
+```{#lst:oper:deploy .bash caption="Simple instruction set to deploy a new instance of the ISO 28258 database."}
 git clone git@git.wur.nl:isric/databases/iso28258.git
 
 cd iso28258

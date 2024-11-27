@@ -322,3 +322,10 @@ After running the previous batch you should have a new database ready to go. In 
 3. Check and test your implementation.
 
 Please read carefully [migrations.md](migrations.md) in order to understand how the migration tool is configured.
+
+
+
+Glossary
+--------
+
+A [glossary of terms](Glossary.md) relevant in Soil Information is included as an accompanying document.
