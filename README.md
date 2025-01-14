@@ -1,60 +1,41 @@
-ISO-28258 Data Model
-====================
+# Data model for the ISO28258:2013 domain model
 
-Postgres data model implementing the ISO-28258 standard.
+This software proposes (and deploys) a [PostGres](https://postgres.org/) database implementing the [ISO28258:2013](https://www.iso.org/standard/44595.html) domain model. ISO28258:2013 proposes a domain model to store & exchange data related to soil and land observations, observed on-site or analysed in a laboratory. 
 
-Copyright (C) 2022-2023  ISRIC - World Soil Information
+Storing data according to the ISO28258:2013 model facilitates efficient and consistent storage of soil and land data across various observation campaigns. Continue reading on the background to this initiative in an [accompanying document](Glossary.md). ISRIC - World Soil endorses the use of standardised domain models, to facilitate efficient cooperation in the soil domain.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of
-this software and associated documentation files (the “Software”), to deal in
-the Software without restriction, including without limitation the rights to
-use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
-of the Software, and to permit persons to whom the Software is furnished to do
-so, subject to the following conditions:
+The software is released under an [MIT license](./Licence.md)
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+Copyright (C) 2022-2025 ISRIC - World Soil Information
 
-THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-
-You should have received a copy of the MIT Licence along with this program.  If
-not, see <[https://mit-license.org/](https://mit-license.org/)>.
+Citation: de Sousa, L. M., Calisto, L., van Genuchten P., Turdukulov, U., Kempen, B., 2023. Data model for the ISO 28258 domain model. ISRIC World Soil Information. Available at: [https://iso28258.isric.org/](https://iso28258.isric.org/)
 
 
-Recommended citation
---------------------
+# Datamodel Documentation
 
-de Sousa, L. M., Calisto, L., van Genuchten P., Turdukulov, U., Kempen, B., 2023. Data model for the ISO 28258 domain model. ISRIC World Soil Information. Available at: [https://iso28258.isric.org/](https://iso28258.isric.org/)
+The iso28258 datamodel includes a number of concepts. Most of these are included in this database implementation:
 
-Concepts included
------------------
+- Project: An organisational clustering of a set of observations, like a sampling campaign
+- Site: A defined area where a phenomena is observed
+- Plot: A location within the site where an observation is made
+- Surface: The boundary between soil and air/water
+- Profile: A cross section through the layers of the soil by drilling a hole or digging a pit
+- Element: A layer or horizon in a soil profile
+- Specimen: A physical sample, typically analysed in a laboratory
+- Property: A property being observed or measured, e.g. texture, pH, volume percentage of pores
+- Procedure: A procedure how the observation has been made
+- Observation: The act of observing or measuring a property
+- Result: The observed value or class for a property
 
-- Project
-- Site
-- Plot
-- Surface
-- Profile
-- Element
-- Specimen
-- Property
-- Procedure
-- Observation
-- Result
-
-Concepts not included
----------------------
+However we've decided to **not** inclode:
 
 - Horizon & Layer: as they are essentially the same in the domain, for now only ProfileElement is included.
-- Sample
+- Sample: because in soil science it is often not distinguishable from the specimen.
 
 Diagrams
 --------
+
+The diagrams below explain how the concepts relate to each other.
 
 ### Project and Site
 
@@ -150,7 +131,7 @@ erDiagram
 
 ### Descriptive Observations
 
-A similar structure applies to the main FoIs: Surface, Plot, Profile, Element and Specimen. 
+A similar structure applies to the main Features of Interest: Surface, Plot, Profile, Element and Specimen. 
 
 ```mermaid
 erDiagram
@@ -295,16 +276,9 @@ erDiagram
 ```
 
 
+# Installation instructions
 
-***
-
-***
-
-
-How to deploy it
------------------
-
-We make use of graphile-migrate as a migration tool. In order to launch a new database:
+The tool uses [graphile-migrate](https://github.com/graphile/migrate) as a database configuration/migration tool. In order to launch and update the database:
 
 ### Using it the 1º time
 
@@ -313,6 +287,7 @@ We make use of graphile-migrate as a migration tool. In order to launch a new da
 3. From inside the terminal, go to this repo root folder `yarn install`
 4. After the previous step run `yarn run graphile-migrate reset --erase` 
 5. You should now have a new database ready to go.
+
 ### Using it for development 
 
 After running the previous batch you should have a new database ready to go. In a quick resume any SQL code can be done as:
@@ -325,7 +300,3 @@ Please read carefully [migrations.md](migrations.md) in order to understand how 
 
 
 
-Glossary
---------
-
-A [glossary of terms](Glossary.md) relevant in Soil Information is included as an accompanying document.

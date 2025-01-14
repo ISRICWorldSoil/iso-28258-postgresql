@@ -133,6 +133,11 @@ Glossary
 
 This section provides short definitions for a series of terms relevant in the context of Soil Information Systems.
 
+Also consider these alternative vocabulary sources:
+
+- Definitions of Soil related terms are available in [ISO11074:2015](https://www.iso.org/standard/59259.html), and available via the public [ISO glossary viewer](https://www.iso.org/obp/ui#iso:std:iso:11074:ed-2:v1:en:term:2.1.1).
+- The [Glosis Web Ontology](https://github.com/glosis-ld/glosis) is a related initiative which includes a number of [code lists](https://github.com/glosis-ld/glosis/blob/master/glosis_cl.ttl), which are used by this software.
+
 ### Ontology
 
 Written with a capital "O", it refers to the branch of Meta-physics concerned
